@@ -1493,6 +1493,13 @@ MonoBehaviour:
   scale: 1
   gridPrefab: {fileID: 729929849}
   leftBottomLocation: {x: 5, y: 0, z: 0}
+  startX: 0
+  startY: 0
+  endX: 2
+  endY: 2
+  path: []
+  findDistance: 0
+  YesButNotWorkingYet: 0
 --- !u!4 &1864352847
 Transform:
   m_ObjectHideFlags: 0
@@ -1542,6 +1549,13 @@ MonoBehaviour:
   scale: 1
   gridPrefab: {fileID: 393204384}
   leftBottomLocation: {x: 0, y: 0, z: 0}
+  startX: 0
+  startY: 0
+  endX: 2
+  endY: 2
+  path: []
+  findDistance: 0
+  YesButNotWorkingYet: 0
 --- !u!4 &1904025165
 Transform:
   m_ObjectHideFlags: 0
