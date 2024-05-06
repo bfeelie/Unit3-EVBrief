@@ -8,12 +8,12 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Truck
+  - 
   - Water
   - UI
-  - 
-  - 
-  - 
+  - Drivable Surface
+  - Car Body
+  - Car Inner Body
   - 
   - 
   - 
