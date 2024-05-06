@@ -188,7 +188,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6008471790606947423, guid: 9fe30807c21e08f41a5c1ed89a11c972, type: 3}
       propertyPath: gravity
-      value: 3.62
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008471790606947423, guid: 9fe30807c21e08f41a5c1ed89a11c972, type: 3}
+      propertyPath: bodyTilt
+      value: 3.73
+      objectReference: {fileID: 0}
+    - target: {fileID: 6008471790606947423, guid: 9fe30807c21e08f41a5c1ed89a11c972, type: 3}
+      propertyPath: accelaration
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 6008471790606947424, guid: 9fe30807c21e08f41a5c1ed89a11c972, type: 3}
       propertyPath: m_Name
