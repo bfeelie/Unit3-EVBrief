@@ -215,7 +215,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1001 &718020689
 PrefabInstance:
@@ -291,7 +291,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 488532, guid: 40e898d0abdde47f48a5f393d20cc0f8, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0
+      value: -7.6
       objectReference: {fileID: 0}
     - target: {fileID: 488532, guid: 40e898d0abdde47f48a5f393d20cc0f8, type: 3}
       propertyPath: m_LocalPosition.y
@@ -343,7 +343,7 @@ GameObject:
   - component: {fileID: 1094482608}
   - component: {fileID: 1094482607}
   - component: {fileID: 1094482606}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Plane
   m_TagString: Untagged
   m_Icon: {fileID: 0}
