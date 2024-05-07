@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using UnityEngine;
 
-//Create a menu to select from in
+// Written using This is GameDev tutorial - https://www.youtube.com/watch?v=7_dyDmF0Ktw
+
 [CreateAssetMenu(menuName = "GameEvent")]
 public class GameEvent : ScriptableObject
 {
@@ -10,11 +12,11 @@ public class GameEvent : ScriptableObject
     public List<GameEventListener> listeners = new List<GameEventListener>();
 
     //Call "raise" - check through all enabled listeners, and allow the UnityEvent response (see GameEventListeners)
-    public void Raise()
+    public void Raise(UnityEngine.Component sender, object data)
     {
         for (int i = 0; i < listeners.Count; i++)
         {
-            listeners[i].OnEventRaised();
+            listeners[i].OnEventRaised(sender, data);
         }
     }
 

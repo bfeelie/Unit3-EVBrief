@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+public class CustomGameEvent : UnityEvent<Component, object> {}
+
 public class GameEventListener : MonoBehaviour
 {
     //Allow access to Event script
@@ -23,7 +25,7 @@ public class GameEventListener : MonoBehaviour
     }
 
     //Call Unity to invoke the set items in inspector when event is broadcasted or "raised"
-    public void OnEventRaised()
+    public void OnEventRaised(Component sender, object data)
     {
         response.Invoke();
     }
