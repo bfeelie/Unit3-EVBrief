@@ -15,6 +15,9 @@ public class Player_Energy : MonoBehaviour
     [Header("Enemy Prefab")]
     public GameObject enemy;
 
+    [Header("Events")]
+    public GameEvent onEnergyChanged;
+
     //Start game with full health & get enemy colliders
     void Awake()
     {
@@ -56,6 +59,9 @@ public class Player_Energy : MonoBehaviour
         currentEnergy -= deplete;
 
         energyBar.SetEnergy(currentEnergy);
+
+        // Event Listener able to detect change
+        onEnergyChanged.Raise();
     }
 
     // Increase energy when charging, update energy bar
@@ -64,5 +70,8 @@ public class Player_Energy : MonoBehaviour
         currentEnergy += increase;
 
         energyBar.SetEnergy(currentEnergy);
+
+        // Event Listener able to detect change
+        onEnergyChanged.Raise();
     }
 }

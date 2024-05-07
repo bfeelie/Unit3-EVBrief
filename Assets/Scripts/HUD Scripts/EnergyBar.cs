@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class EnergyBar : MonoBehaviour
 {
+    // Made using Brackeys Health Bar tutorial, with tweaks
+
     // Reference slider Inspector component 
     [Header("Slider Object")]
     public Slider slider;

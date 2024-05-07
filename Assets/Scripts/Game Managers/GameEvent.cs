@@ -9,7 +9,7 @@ public class GameEvent : ScriptableObject
     //Make a list of listeners for Game Events
     public List<GameEventListener> listeners = new List<GameEventListener>();
 
-    //Call "raise" - check through all enabled listeners, and allow the UnityEvent response (see SCR_GameEventListeners)
+    //Call "raise" - check through all enabled listeners, and allow the UnityEvent response (see GameEventListeners)
     public void Raise()
     {
         for (int i = 0; i < listeners.Count; i++)
