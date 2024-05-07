@@ -29,8 +29,6 @@ public class GridBehaviour : MonoBehaviour
     [Header("Randomise?")]
     public bool YesButNotWorkingYet;
 
-
-
     void Awake()
     {
         // To create the array in the size of the columns & rows declared in inspector
