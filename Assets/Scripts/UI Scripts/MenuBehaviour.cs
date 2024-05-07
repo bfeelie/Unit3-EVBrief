@@ -8,14 +8,15 @@ using UnityEditor;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    // Tried a different way to do it, doesn't really work
-    //public GameObject menuOverlay;
+
+    public GameObject mainMenu;
+    public GameObject pauseMenu;
+    public GameObject loseMenu;
+    public GameObject winMenu;
 
     void Awake()
     {
-        GameObject mainMenu = GameObject.Find("Main Menu");
         mainMenu.SetActive(true);
-       // menuOverlay.SetActive(true);
         PauseGame();
     }
 
@@ -26,7 +27,7 @@ public class MenuBehaviour : MonoBehaviour
 
     public void PlayGame()
     {
-        GameObject mainMenu = GameObject.Find("Main Menu");
+        // Need to change this to a reset scene load, maybe if restart
         mainMenu.SetActive(false);
         ResumeGame();
     }
@@ -53,6 +54,6 @@ public class MenuBehaviour : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1;
-        //menuOverlay.SetActive(false);
+        pauseMenu.SetActive(false);
     }
 }

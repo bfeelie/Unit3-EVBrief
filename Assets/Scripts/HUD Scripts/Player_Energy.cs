@@ -11,10 +11,6 @@ public class Player_Energy : MonoBehaviour
     public int maxEnergy = 100;
     public int currentEnergy;
 
-    //Enemy object references
-    [Header("Enemy Prefab")]
-    public GameObject enemy;
-
     //[Header("Events")]
     //public GameEvent onEnergyChanged;
 
@@ -23,8 +19,6 @@ public class Player_Energy : MonoBehaviour
     {
         currentEnergy = maxEnergy;
         energyBar.SetEnergy(maxEnergy);
-
-        enemy.GetComponent<Collider>();
     }
 
     //Practice - use electricity on button press; check bar doesn't break from too much use at once (spamming)
