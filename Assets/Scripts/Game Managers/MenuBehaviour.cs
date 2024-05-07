@@ -2,8 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UIElements;
-using UnityEngine.UI;
+#if UNITY_EDITOR
+using UnityEditor; 
+#endif
 
 public class MenuBehaviour : MonoBehaviour
 {
@@ -15,5 +16,14 @@ public class MenuBehaviour : MonoBehaviour
     public void QuitGame()
     {
         Application.Quit();
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#endif
+
+    }
+
+    public void OptionsMenu()
+    {
+        // Add overlay & set boolean to false; and add a rule for activating when needed active
     }
 }
