@@ -734,7 +734,7 @@ GameObject:
   - component: {fileID: 121183664822932416}
   m_Layer: 6
   m_Name: PetrolStationLanes
-  m_TagString: Untagged
+  m_TagString: Petrol Station
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1917,8 +1917,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 14.123703, y: 1, z: 7.1338315}
-  m_Center: {x: 2.7465038, y: 0, z: 11.386978}
+  m_Size: {x: 14.123703, y: 3.8448246, z: 13.901812}
+  m_Center: {x: 2.7465038, y: 1.4224123, z: 8.6833315}
 --- !u!1 &2533631454302394168
 GameObject:
   m_ObjectHideFlags: 0

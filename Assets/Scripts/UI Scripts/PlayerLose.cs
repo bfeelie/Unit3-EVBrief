@@ -12,13 +12,13 @@ public class PlayerLose : MonoBehaviour
     {
         if (collision.collider.CompareTag("Player"))
         {
-            Time.timeScale = 0;
-            loseMenu.SetActive(true);
+            LoseState();
         }
     }
 
-    /*private void Awake()
+    public void LoseState()
     {
-        loseMenu.SetActive(false);
-    }*/
+        Time.timeScale = 0;
+        loseMenu.SetActive(true);
+    }
 }

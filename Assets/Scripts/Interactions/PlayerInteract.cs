@@ -1,6 +1,8 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -8,30 +10,34 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField]
     private LayerMask petrolStationLayerMask;
 
-    // Instead of using a player camera, checking using the player's car
+    // Uses non-player visible camera for raycast (set to display 8)
     [SerializeField]
-    private Transform playerCarCam;
+    //changed to public to try BlowUp
+    public Transform playerCarCam;
 
     // Text pop up telling player how to interact
     [SerializeField]
     private GameObject petrolInteractUI;
-    private GameObject chargerInteractUI;
+    //private GameObject chargerInteractUI;
 
     [SerializeField]
     [Min(1)]
-    private float hitRange = 3;
+    //changed to public to try BlowUp
+    public float hitRange = 3;
 
-    private RaycastHit hit;
+    //changed to public to try BlowUp
+    public RaycastHit hit;
 
     private void Update()
     {
         CheckForUI();
     }
 
-    void CheckForUI()
+    //changed to public to try BlowUp
+    public void CheckForUI()
     {
         // See raycast in editor
-        Debug.DrawRay(playerCarCam.position, playerCarCam.forward * hitRange, Color.white);
+        Debug.DrawRay(playerCarCam.position, playerCarCam.forward * hitRange, Color.red);
 
         // If not hitting collider, do not show text
         if (hit.collider != null)
@@ -45,6 +51,7 @@ public class PlayerInteract : MonoBehaviour
         {
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
             petrolInteractUI.SetActive(true);
+            //BlowUpPetrol();
         }
     }
 
