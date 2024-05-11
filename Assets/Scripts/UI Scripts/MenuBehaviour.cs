@@ -2,42 +2,40 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-#if UNITY_EDITOR
-using UnityEditor; 
-#endif
+//#if UNITY_EDITOR
+//using UnityEditor; 
+//#endif
 
 public class MenuBehaviour : MonoBehaviour
 {
-
-    public GameObject mainMenu;
-    public GameObject pauseMenu;
-    public GameObject loseMenu;
-    public GameObject winMenu;
+    // Only necessary for menu overlay
+    //public GameObject pauseMenu;
+    //public GameObject loseMenu;
+    //public GameObject winMenu;
 
     void Awake()
     {
-        mainMenu.SetActive(true);
-        PauseGame();
-    }
-
-    void Update()
-    {
-
+        //mainMenu.SetActive(true);
+        //PauseGame();
     }
 
     public void PlayGame()
     {
-        // Need to change this to a reset scene load, maybe if restart
-        mainMenu.SetActive(false);
-        ResumeGame();
+        SceneManager.LoadSceneAsync(1);
+
+        // This code is for an overlay instead of scene change - setup for that is in Pacman_Coding scene
+        //mainMenu.SetActive(false);
+        //ResumeGame();
     }
 
     public void QuitGame()
     {
         Application.Quit();
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = false;
-#endif
+
+//This code is to test quit in Unity - need to uncomment the if statement at the system library above too ^
+//#if UNITY_EDITOR
+//        EditorApplication.isPlaying = false;
+//#endif
 
     }
     public void OptionsMenu()
@@ -54,6 +52,6 @@ public class MenuBehaviour : MonoBehaviour
     public void ResumeGame()
     {
         Time.timeScale = 1;
-        pauseMenu.SetActive(false);
+        //pauseMenu.SetActive(false);
     }
 }

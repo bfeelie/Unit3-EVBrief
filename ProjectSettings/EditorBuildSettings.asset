@@ -7,8 +7,11 @@ EditorBuildSettings:
   m_Scenes:
   - enabled: 1
     path: Assets/Scenes/MainMenu.unity
-    guid: 7ef9e44e7268fe645b738c9390344d95
-  - enabled: 1
+    guid: ddd40dd078e04b64497f276d779b4c0f
+  - enabled: 0
     path: Assets/Scenes/Pacman_Coding.unity
     guid: 5305c679bfa5de7438957bc8f909ed9f
+  - enabled: 1
+    path: Assets/Scenes/Prototype_V1.unity
+    guid: e6950aed000e91043bde51c3aa02ea9d
   m_configObjects: {}
