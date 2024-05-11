@@ -13,7 +13,7 @@ public class PlayerInteract : MonoBehaviour
     // Uses non-player visible camera for raycast (set to display 8)
     [SerializeField]
     //changed to public to try BlowUp
-    public Transform playerCarCam;
+    private Transform playerCarCam;
 
     // Text pop up telling player how to interact
     [SerializeField]
@@ -22,11 +22,11 @@ public class PlayerInteract : MonoBehaviour
 
     [SerializeField]
     [Min(1)]
-    //changed to public to try BlowUp
-    public float hitRange = 3;
+  
+    private float hitRange = 3;
 
     //changed to public to try BlowUp
-    public RaycastHit hit;
+    private RaycastHit hit;
 
     private void Update()
     {
@@ -51,7 +51,6 @@ public class PlayerInteract : MonoBehaviour
         {
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
             petrolInteractUI.SetActive(true);
-            //BlowUpPetrol();
         }
     }
 

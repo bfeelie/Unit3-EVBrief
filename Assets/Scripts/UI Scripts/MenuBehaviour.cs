@@ -2,21 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-//#if UNITY_EDITOR
-//using UnityEditor; 
-//#endif
+#if UNITY_EDITOR
+using UnityEditor; 
+#endif
 
 public class MenuBehaviour : MonoBehaviour
 {
     // Only necessary for menu overlay
-    //public GameObject pauseMenu;
-    //public GameObject loseMenu;
-    //public GameObject winMenu;
+    public GameObject pauseMenu;
+    public GameObject winMenu;
 
     void Awake()
     {
-        //mainMenu.SetActive(true);
-        //PauseGame();
+     
     }
 
     public void PlayGame()
@@ -33,9 +31,9 @@ public class MenuBehaviour : MonoBehaviour
         Application.Quit();
 
 //This code is to test quit in Unity - need to uncomment the if statement at the system library above too ^
-//#if UNITY_EDITOR
-//        EditorApplication.isPlaying = false;
-//#endif
+#if UNITY_EDITOR
+        EditorApplication.isPlaying = false;
+#endif
 
     }
     public void OptionsMenu()
@@ -46,12 +44,21 @@ public class MenuBehaviour : MonoBehaviour
     // Use these functions for Pause & Main Menu
     public void PauseGame()
     {
-        Time.timeScale = 0;
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
-        //pauseMenu.SetActive(false);
+        pauseMenu.SetActive(false);
+    }
+
+    public void MainMenuReturn()
+    {
+        SceneManager.LoadSceneAsync(0);
     }
 }

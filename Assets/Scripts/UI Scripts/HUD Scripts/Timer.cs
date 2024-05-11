@@ -6,12 +6,14 @@ using UnityEngine.UI;
 
 public class Timer : MonoBehaviour
 {
-    public float time;
+    [Header("Timer Variables")]
     public TextMeshProUGUI TimerText;
+    public float time;
     public Image Fill;
     public float Max;
 
-    PlayerLose playerlose;
+    [Header("Lose States")]
+    public GameObject loseMenu;
 
     // Update is called once per frame
     void Update()
@@ -28,14 +30,19 @@ public class Timer : MonoBehaviour
         if (time <= 0)
             time = 0;
 
-        OutOfTime();
+        if (time == 0)
+        {
+            OutOfTime();
+        }
     }
+
 
     void OutOfTime()
     {
         if (time == 0)
         {
-            playerlose.LoseState();
+            Time.timeScale = 0;
+            loseMenu.SetActive(true);
         }
         else
             return;
