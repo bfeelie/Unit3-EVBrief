@@ -40,8 +40,8 @@ namespace AVC {
         public bool useEffects = false;
         public TrailRenderer RLSkid;
         public TrailRenderer RRSkid;
-        public ParticleSystem RLSmoke;
-        public ParticleSystem RRSmoke;
+        //public ParticleSystem RLSmoke;
+        //public ParticleSystem RRSmoke;
 
         [HideInInspector]
         public Vector3 carVelocity;
@@ -157,8 +157,8 @@ namespace AVC {
                 if(useEffects) {
                     RLSkid.emitting = false;
                     RRSkid.emitting = false;
-                    RLSmoke.Stop();
-                    RRSmoke.Stop();
+                    //RLSmoke.Stop();
+                    //RRSmoke.Stop();
                 }
 
                 if(!aiMode) {
@@ -214,11 +214,11 @@ namespace AVC {
                 }
 
                 if(Mathf.Abs(carVelocity.x) > 10f && (Input.GetAxis("Jump") > 0.1f || aiMode)){
-                    RLSmoke.Play();
-                    RRSmoke.Play();
+                    //RLSmoke.Play();
+                    //RRSmoke.Play();
                 } else {
-                    RLSmoke.Stop();
-                    RRSmoke.Stop();
+                    //RLSmoke.Stop();
+                    //RRSmoke.Stop();
                 }
             }
         }
