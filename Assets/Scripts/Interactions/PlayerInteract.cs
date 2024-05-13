@@ -41,7 +41,7 @@ public class PlayerInteract : MonoBehaviour
 
         // If not hitting collider, do not show text
         if (hit.collider != null)
-        {
+        { 
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
             petrolInteractUI.SetActive(false);
         }

@@ -8,7 +8,9 @@ public class Player_Energy : MonoBehaviour
     //Refs for player electricity (energy) values
     [Header("UI Variables")]
     public EnergyBar energyBar;
+
     public int maxEnergy = 100;
+    public int energyCost;
     public int currentEnergy;
 
     //[Header("Events")]
@@ -25,15 +27,15 @@ public class Player_Energy : MonoBehaviour
     void Update()
     {
         // Moved these from Add/Use functions - put if statements in function instead
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
-            UseEnergy(10);
-        }
+            UseEnergy(energyCost);
+        }*/
 
         // Add energy
         if (Input.GetKeyDown(KeyCode.LeftShift))
         {
-            AddEnergy(10);
+            AddEnergy(energyCost);
         }
     }
 
