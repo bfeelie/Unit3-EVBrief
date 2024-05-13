@@ -1,9 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class EnemyMovement : MonoBehaviour
 {
+    Rigidbody player;
+
     // Movement + Cooldown
     private Vector3 targetDirection;
     private float changeDirectionCooldown;
@@ -102,10 +105,10 @@ public class EnemyMovement : MonoBehaviour
 
 
 
-
     // Again if 0, ignore (don't move), otherwise move on Y axis at x speed
     void SetVelocity()
     {
         enemyRb.velocity = transform.forward * speed;
     }
+
 }

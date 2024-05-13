@@ -5,17 +5,18 @@ TagManager:
   serializedVersion: 2
   tags:
   - EnergyBar
+  - Petrol Station
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Petrol Station
   - Water
   - UI
   - Drivable Surface
   - Car Body
   - Car Inner Body
-  - 
+  - Charger
   - 
   - 
   - 
