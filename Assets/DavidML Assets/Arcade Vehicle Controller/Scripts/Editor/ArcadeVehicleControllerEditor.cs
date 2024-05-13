@@ -131,9 +131,9 @@ namespace AVC
             EditorGUILayout.PropertyField(useEffects, new GUIContent("Tire effects enabled?"));
             if(useEffects.boolValue == true) {
                 EditorGUILayout.PropertyField(controllerSO.FindProperty("RLSkid"), new GUIContent("Rear left skid"));
-                EditorGUILayout.PropertyField(controllerSO.FindProperty("RLSmoke"), new GUIContent("Rear left smoke"));
+                //EditorGUILayout.PropertyField(controllerSO.FindProperty("RLSmoke"), new GUIContent("Rear left smoke"));
                 EditorGUILayout.PropertyField(controllerSO.FindProperty("RRSkid"), new GUIContent("Rear right skid"));
-                EditorGUILayout.PropertyField(controllerSO.FindProperty("RRSmoke"), new GUIContent("Rear right smoke"));
+                //EditorGUILayout.PropertyField(controllerSO.FindProperty("RRSmoke"), new GUIContent("Rear right smoke"));
             }
 
             GUILayout.Space(16f);
