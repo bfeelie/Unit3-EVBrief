@@ -5936,8 +5936,6 @@ MonoBehaviour:
   useEffects: 1
   RLSkid: {fileID: 7113247564342020101}
   RRSkid: {fileID: 7113247564428463932}
-  RLSmoke: {fileID: 7113247562854479521}
-  RRSmoke: {fileID: 7113247564265252481}
   carVelocity: {x: 6.249756e-10, y: 0.0000008046627, z: 0.00000005830365}
   bodyTilt: 3.23
   engineSound: {fileID: 7113247563069895862}
@@ -5991,7 +5989,7 @@ AudioSource:
   m_audioClip: {fileID: 8300000, guid: 18ec713600f17e34ba6269d5ad73b797, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
-  m_Pitch: 0.3129187
+  m_Pitch: 0.3000065
   Loop: 1
   Mute: 0
   Spatialize: 0
