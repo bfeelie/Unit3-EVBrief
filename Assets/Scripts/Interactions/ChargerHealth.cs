@@ -13,9 +13,17 @@ public class ChargerHealth : MonoBehaviour
 
     private void Awake()
     {
-        
-        chargerHealth = maxHealth;
+        player = gameObject.GetComponent<PlayerInteract>();
     }
+
+    // Started in case I needed to tell this to stop
+    /*void PlayerFull()
+    {
+        if (playerEnergy.currentEnergy == 100)
+        {
+
+        }
+    }*/
 
     //May not be necessary until need to halt/start charge? Though charge can just stop when it reaches 100 in exit?
     /*private void OnTriggerEnter(Collider other)
@@ -33,10 +41,10 @@ public class ChargerHealth : MonoBehaviour
 
     }*/
 
-    private void OnTriggerExit(Collider other)
+    /*private void OnTriggerExit(Collider other)
     {
         // check if it's a player
-        if (other.gameObject.GetComponent<Player_Energy>())
+        if (other.gameObject.GetComponent<PlayerInteract>())
         {
             player.isAtCharger = false;
 
@@ -50,6 +58,5 @@ public class ChargerHealth : MonoBehaviour
         {
             return;
         }
- 
-    }
+    }*/
 }
