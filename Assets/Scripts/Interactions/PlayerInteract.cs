@@ -19,6 +19,7 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField]
     //could be public later if you need other things to call into it from outside
     private Player_Energy playerEnergy;
+    private EnergyBar energyBar;
 
 
     // Text pop up telling player how to interact
@@ -45,6 +46,7 @@ public class PlayerInteract : MonoBehaviour
     {
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
+        energyBar = gameObject.GetComponent<EnergyBar>();
     }
 
 
@@ -97,26 +99,34 @@ public class PlayerInteract : MonoBehaviour
     {
         if (isAtCharger == true)
         {
+            if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
+            {
+                Debug.Log("Charger not needed.");
+                isAtCharger = false;
+                currentCharger = null;
+            }
 
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
             {
-                playerEnergy.AddEnergy(10);
-                Debug.Log("Player has " + playerEnergy.currentEnergy);
-                currentCharger.chargerHealth -= 10;
-                Debug.Log("Charger has been used and now has " + currentCharger.chargerHealth + "charges left.");
-                playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
-
-                // turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
-                //currentCharger.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
-                //currentCharger.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
-
-                // check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
-                if (currentCharger.chargerHealth <= 0)
+                if (playerEnergy.currentEnergy >= 100)
                 {
-                    Debug.Log("Charger depleted.");
-                    isAtCharger = false;
-                    currentCharger = null;
+                    Debug.Log("Charger not needed.");
+                    return;
                 }
+
+                    playerEnergy.AddEnergy(10);
+
+                    Debug.Log("Player has " + playerEnergy.currentEnergy);
+                    playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
+
+                    currentCharger.chargerHealth -= 10;
+                    Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
+
+                    // turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
+                    //currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
+                    //currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
+
+                    // check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
             }
         }
         // Defensive code just to stop this function running all the time
