@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -22,36 +23,35 @@ public class Player_Energy : MonoBehaviour
     //Practice - use electricity on button press; check bar doesn't break from too much use at once (spamming)
     void Update()
     {
-
+     
     }
 
     // Decrease energy when used, update energy bar
     public void UseEnergy(int deplete)
     {
-        currentEnergy -= deplete;
-        energyBar.SetEnergy(currentEnergy);
-
         if (currentEnergy <= 0)
         {
-            currentEnergy = 0;
+            return;
+        }
+        else
+        {
+            currentEnergy -= deplete;
         }
 
+        energyBar.SetEnergy(currentEnergy);
+       
         //Event Listener able to detect change
         //onEnergyChanged.Raise();
     }
 
-    // Increase energy when charging, update energy bar
+    // Increase energy when charging, update energy bar - stop from adding/taking more energy
     public void AddEnergy(int increase)
     {
-
-        if (currentEnergy <= 0)
+        if (currentEnergy >= 0)
         {
-            currentEnergy = 0;
+            currentEnergy += increase;
+            Debug.Log("Added energy?");
         }
-
-        currentEnergy += increase;
-
-        energyBar.SetEnergy(currentEnergy);
 
         // Event Listener able to detect change
         //onEnergyChanged.Raise();
