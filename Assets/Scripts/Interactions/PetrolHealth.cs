@@ -16,6 +16,8 @@ public class PetrolHealth : MonoBehaviour
     [HideInInspector]
     public int smokeIndex = 0;
 
+    public bool isDestroyed = false;
+
     private void Awake()
     {
         stationHealth = maxHealth;
@@ -25,6 +27,7 @@ public class PetrolHealth : MonoBehaviour
     {
         if (stationHealth == 0)
         {
+            isDestroyed = true;
             // change material or meshes OR not necessary and just keep on PlayerInteract
         }
 

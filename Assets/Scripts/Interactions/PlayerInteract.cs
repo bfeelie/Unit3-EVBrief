@@ -16,9 +16,8 @@ public class PlayerInteract : MonoBehaviour
     //changed to public to try BlowUp
     private Transform playerCarCam;
 
-    [SerializeField]
     //could be public later if you need other things to call into it from outside
-    private Player_Energy playerEnergy;
+    [HideInInspector]  private Player_Energy playerEnergy;
 
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
