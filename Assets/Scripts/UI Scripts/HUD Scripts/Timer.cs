@@ -1,4 +1,4 @@
-using System.Collections;
+/*using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -15,13 +15,20 @@ public class Timer : MonoBehaviour
     [Header("Lose States")]
     public GameObject loseMenu;
 
+    GameLoop gameLoop;
+
+    private void Awake()
+    {
+        gameLoop = gameObject.GetComponent<GameLoop>();
+    }
+
     // Update is called once per frame
     void Update()
     {
         UseTimer();
     }
 
-    void UseTimer()
+    public void UseTimer()
     {
         time -= Time.deltaTime;
         TimerText.text = "" + (int)time;
@@ -32,19 +39,7 @@ public class Timer : MonoBehaviour
 
         if (time == 0)
         {
-            OutOfTime();
+            gameLoop.OutOfTime();
         }
     }
-
-
-    void OutOfTime()
-    {
-        if (time == 0)
-        {
-            Time.timeScale = 0;
-            loseMenu.SetActive(true);
-        }
-        else
-            return;
-    }
-}
+}*/

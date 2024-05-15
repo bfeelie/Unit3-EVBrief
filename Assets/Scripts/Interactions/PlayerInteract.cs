@@ -19,8 +19,6 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField]
     //could be public later if you need other things to call into it from outside
     private Player_Energy playerEnergy;
-    private EnergyBar energyBar;
-
 
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
@@ -46,7 +44,6 @@ public class PlayerInteract : MonoBehaviour
     {
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
-        energyBar = gameObject.GetComponent<EnergyBar>();
     }
 
 
@@ -178,12 +175,6 @@ public class PlayerInteract : MonoBehaviour
         else
         {
             return;
-            // Don't think this is needed -- unless tell to start regen cycle
-           /* if (isAtCharger)
-            {
-
-                petrolInteractUI.SetActive(false);
-            }*/
         }
 
 
@@ -204,11 +195,9 @@ public class PlayerInteract : MonoBehaviour
 
     }
 
-
-
+    // Checks for proximity to Petrol Station / Charger -- Enter
     private void OnTriggerEnter(Collider other)
     {
-        // Check if it's a petrol station
         if (other.gameObject.GetComponent<PetrolHealth>())
         {
             Debug.Log("We are at Petrol Station: " + other.gameObject.name);
@@ -242,9 +231,7 @@ public class PlayerInteract : MonoBehaviour
 
     }
 
-
-
-
+    // Checks for proximity to Petrol Station / Charger -- Exit
     private void OnTriggerExit(Collider other)
     {
         // Check if it's a petrol station
