@@ -16,10 +16,10 @@ public class ChargerHealth : MonoBehaviour
         slider = gameObject.GetComponent<ChargerBar>();
     }
 
-    void DepleteEnergy()
+    public void DepleteEnergy()
     {
         chargerHealth -= 10;
-        slider.SetEnergy(-10);
+        slider.TakeEnergy(-10);
 
     }
 

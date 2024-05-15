@@ -30,7 +30,6 @@ public class PlayerInteract : MonoBehaviour
     public bool isAtCharger = false;
     public ChargerHealth currentCharger;
     public GameObject chargerInteractUI;
-    public ChargerHealth chargerHealth;
 
     [SerializeField]
     [Min(1)]
@@ -113,7 +112,7 @@ public class PlayerInteract : MonoBehaviour
                 }
 
                     playerEnergy.AddEnergy(10);
-
+                    currentCharger.DepleteEnergy();
                     Debug.Log("Player has " + playerEnergy.currentEnergy);
                     playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
                     // Add tell to use ChargerHealth's Deplete energy later
