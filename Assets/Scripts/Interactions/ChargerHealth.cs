@@ -25,7 +25,7 @@ public class ChargerHealth : MonoBehaviour
         }
     }*/
 
-    //May not be necessary until need to halt/start charge? Though charge can just stop when it reaches 100 in exit?
+    // May not be necessary until need to halt/start charge? Though charge can just stop when it reaches 100 in exit?
     /*private void OnTriggerEnter(Collider other)
     {
         // check if it's a player
@@ -43,7 +43,7 @@ public class ChargerHealth : MonoBehaviour
 
     /*private void OnTriggerExit(Collider other)
     {
-        // check if it's a player
+        // Check if it's a player
         if (other.gameObject.GetComponent<PlayerInteract>())
         {
             player.isAtCharger = false;

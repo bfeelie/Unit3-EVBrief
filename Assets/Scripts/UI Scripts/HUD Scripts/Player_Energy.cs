@@ -6,21 +6,21 @@ using UnityEngine.UI;
 
 public class Player_Energy : MonoBehaviour
 {
-    //Refs for player electricity (energy) values
+    // Refs for player electricity (energy) values
     [Header("UI Variables")]
     public EnergyBar energyBar;
 
     public int maxEnergy = 100;
     public int currentEnergy;
 
-    //Start game with full health & get enemy colliders
+    // Start game with full health & get enemy colliders
     void Awake()
     {
         currentEnergy = maxEnergy;
         energyBar.SetEnergy(maxEnergy);
     }
 
-    //Practice - use electricity on button press; check bar doesn't break from too much use at once (spamming)
+    // Practice - use electricity on button press; check bar doesn't break from too much use at once (spamming)
     void Update()
     {
      

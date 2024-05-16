@@ -13,10 +13,10 @@ public class PlayerInteract : MonoBehaviour
 
     // Uses non-player visible camera for raycast (set to display 8)
     [SerializeField]
-    //changed to public to try BlowUp
+    // Changed to public to try BlowUp
     private Transform playerCarCam;
 
-    //could be public later if you need other things to call into it from outside
+    // Could be public later if you need other things to call into it from outside
     [HideInInspector]  private Player_Energy playerEnergy;
 
     // Text pop up telling player how to interact
@@ -45,14 +45,12 @@ public class PlayerInteract : MonoBehaviour
         currentCharger = gameObject.GetComponent<ChargerHealth>();
     }
 
-
     private void Update()
     {
         CheckForUI();
         AttackPetrol();
         UseCharger();
     }
-
 
     // Function to make Player deplete Petrol station health IF in range and pressing E
     // Calls on invisible health bar from stationHealth script
@@ -118,11 +116,11 @@ public class PlayerInteract : MonoBehaviour
                     currentCharger.chargerHealth -= 10;
                     Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
 
-                    // turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
+                    // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
                     //currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
                     //currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
 
-                    // check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
+                    // Check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
             }
         }
         // Defensive code just to stop this function running all the time
