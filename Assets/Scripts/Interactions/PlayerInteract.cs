@@ -13,13 +13,11 @@ public class PlayerInteract : MonoBehaviour
 
     // Uses non-player visible camera for raycast (set to display 8)
     [SerializeField]
-    //changed to public to try BlowUp
+    // Changed to public to try BlowUp
     private Transform playerCarCam;
 
-    [SerializeField]
-    //could be public later if you need other things to call into it from outside
-    private Player_Energy playerEnergy;
-
+    // Could be public later if you need other things to call into it from outside
+    [HideInInspector]  private Player_Energy playerEnergy;
 
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
@@ -47,14 +45,12 @@ public class PlayerInteract : MonoBehaviour
         currentCharger = gameObject.GetComponent<ChargerHealth>();
     }
 
-
     private void Update()
     {
         CheckForUI();
         AttackPetrol();
         UseCharger();
     }
-
 
     // Function to make Player deplete Petrol station health IF in range and pressing E
     // Calls on invisible health bar from stationHealth script
@@ -97,26 +93,34 @@ public class PlayerInteract : MonoBehaviour
     {
         if (isAtCharger == true)
         {
+            if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
+            {
+                Debug.Log("Charger not needed.");
+                isAtCharger = false;
+                currentCharger = null;
+            }
 
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
             {
-                playerEnergy.AddEnergy(10);
-                Debug.Log("Player has " + playerEnergy.currentEnergy);
-                currentCharger.chargerHealth -= 10;
-                Debug.Log("Charger has been used and now has " + currentCharger.chargerHealth + "charges left.");
-                playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
-
-                // turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
-                //currentCharger.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
-                //currentCharger.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
-
-                // check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
-                if (currentCharger.chargerHealth <= 0)
+                if (playerEnergy.currentEnergy >= 100)
                 {
-                    Debug.Log("Charger depleted.");
-                    isAtCharger = false;
-                    currentCharger = null;
+                    Debug.Log("Charger not needed.");
+                    return;
                 }
+
+                    playerEnergy.AddEnergy(10);
+
+                    Debug.Log("Player has " + playerEnergy.currentEnergy);
+                    playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
+
+                    currentCharger.chargerHealth -= 10;
+                    Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
+
+                    // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
+                    //currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
+                    //currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
+
+                    // Check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
             }
         }
         // Defensive code just to stop this function running all the time
@@ -168,12 +172,6 @@ public class PlayerInteract : MonoBehaviour
         else
         {
             return;
-            // Don't think this is needed -- unless tell to start regen cycle
-           /* if (isAtCharger)
-            {
-
-                petrolInteractUI.SetActive(false);
-            }*/
         }
 
 
@@ -194,11 +192,9 @@ public class PlayerInteract : MonoBehaviour
 
     }
 
-
-
+    // Checks for proximity to Petrol Station / Charger -- Enter
     private void OnTriggerEnter(Collider other)
     {
-        // Check if it's a petrol station
         if (other.gameObject.GetComponent<PetrolHealth>())
         {
             Debug.Log("We are at Petrol Station: " + other.gameObject.name);
@@ -232,9 +228,7 @@ public class PlayerInteract : MonoBehaviour
 
     }
 
-
-
-
+    // Checks for proximity to Petrol Station / Charger -- Exit
     private void OnTriggerExit(Collider other)
     {
         // Check if it's a petrol station
