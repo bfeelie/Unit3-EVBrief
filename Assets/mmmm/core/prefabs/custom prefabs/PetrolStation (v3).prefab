@@ -29675,17 +29675,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 121183664948363651}
     m_Modifications:
-    - target: {fileID: 151800, guid: 92100e31e43794d4a8228b3be43e15aa, type: 3}
-      propertyPath: m_Layer
-      value: 6
-      objectReference: {fileID: 0}
     - target: {fileID: 151802, guid: 92100e31e43794d4a8228b3be43e15aa, type: 3}
       propertyPath: m_Name
       value: env_crete2b
-      objectReference: {fileID: 0}
-    - target: {fileID: 151802, guid: 92100e31e43794d4a8228b3be43e15aa, type: 3}
-      propertyPath: m_Layer
-      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 451802, guid: 92100e31e43794d4a8228b3be43e15aa, type: 3}
       propertyPath: m_RootOrder
