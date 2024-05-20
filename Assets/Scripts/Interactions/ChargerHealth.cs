@@ -9,6 +9,9 @@ public class ChargerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int regenAmount = 10;
 
+    [Header("Particles")]
+    public GameObject[] zapParticles;
+
     ChargerBar slider;
 
     private void Awake()
@@ -19,7 +22,7 @@ public class ChargerHealth : MonoBehaviour
     public void DepleteEnergy()
     {
         chargerHealth -= 10;
-        slider.TakeEnergy(-10);
+        slider.GetComponentInChildren<ChargerBar>().TakeEnergy(-10);
 
     }
 
