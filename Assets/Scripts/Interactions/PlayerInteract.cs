@@ -69,6 +69,7 @@ public class PlayerInteract : MonoBehaviour
 
                 // turn on another smoke particle -- remember to keep particle number the same as array amt
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
+                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
                 currentPetrolStation.smokeIndex++;
 
@@ -125,9 +126,6 @@ public class PlayerInteract : MonoBehaviour
                     // Check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
             }
         }
-        // Defensive code just to stop this function running all the time
-        else
-            isAtCharger = false;
     }
 
 
