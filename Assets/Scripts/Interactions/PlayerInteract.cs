@@ -23,8 +23,8 @@ public class PlayerInteract : MonoBehaviour
     [Header("Petrol Station")]
     [SerializeField]
     public bool isAtPetrolStation = false;
-    public PetrolHealth currentPetrolStation;
-    public GameObject petrolInteractUI;
+    [SerializeField] PetrolHealth currentPetrolStation;
+    [SerializeField] GameObject petrolInteractUI;
 
     [Header("Charging Station")]
     public bool isAtCharger = false;
@@ -69,6 +69,7 @@ public class PlayerInteract : MonoBehaviour
 
                 // turn on another smoke particle -- remember to keep particle number the same as array amt
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
+                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
                 currentPetrolStation.smokeIndex++;
 
@@ -95,6 +96,7 @@ public class PlayerInteract : MonoBehaviour
         {
             if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
             {
+
                 Debug.Log("Charger not needed.");
                 isAtCharger = false;
                 currentCharger = null;
@@ -109,9 +111,10 @@ public class PlayerInteract : MonoBehaviour
                 }
 
                     playerEnergy.AddEnergy(10);
-
+                    currentCharger.DepleteEnergy();
                     Debug.Log("Player has " + playerEnergy.currentEnergy);
                     playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
+                    // Add tell to use ChargerHealth's Deplete energy later
 
                     currentCharger.chargerHealth -= 10;
                     Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
@@ -123,9 +126,6 @@ public class PlayerInteract : MonoBehaviour
                     // Check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
             }
         }
-        // Defensive code just to stop this function running all the time
-        else
-            isAtCharger = false;
     }
 
 
@@ -138,6 +138,7 @@ public class PlayerInteract : MonoBehaviour
         if (isAtPetrolStation)
         {
             petrolInteractUI.SetActive(true);
+            Debug.Log("Activated UI");
         }
 
         // Set UI as false if not at Petrol Station so player can't use it

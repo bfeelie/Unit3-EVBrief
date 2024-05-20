@@ -3,12 +3,13 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Petrol Station
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - PetrolStation
   - Water
   - UI
   - Drivable Surface

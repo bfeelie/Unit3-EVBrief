@@ -9,21 +9,22 @@ public class ChargerHealth : MonoBehaviour
     public int maxHealth = 100;
     public int regenAmount = 10;
 
-    PlayerInteract player;
+    [Header("Particles")]
+    public GameObject[] zapParticles;
+
+    ChargerBar slider;
 
     private void Awake()
     {
-        player = gameObject.GetComponent<PlayerInteract>();
+        slider = gameObject.GetComponent<ChargerBar>();
     }
 
-    // Started in case I needed to tell this to stop
-    /*void PlayerFull()
+    public void DepleteEnergy()
     {
-        if (playerEnergy.currentEnergy == 100)
-        {
+        chargerHealth -= 10;
+        slider.GetComponentInChildren<ChargerBar>().TakeEnergy(-10);
 
-        }
-    }*/
+    }
 
     // May not be necessary until need to halt/start charge? Though charge can just stop when it reaches 100 in exit?
     /*private void OnTriggerEnter(Collider other)
