@@ -23,8 +23,8 @@ public class PlayerInteract : MonoBehaviour
     [Header("Petrol Station")]
     [SerializeField]
     public bool isAtPetrolStation = false;
-    public PetrolHealth currentPetrolStation;
-    public GameObject petrolInteractUI;
+    [SerializeField] PetrolHealth currentPetrolStation;
+    [SerializeField] GameObject petrolInteractUI;
 
     [Header("Charging Station")]
     public bool isAtCharger = false;
