@@ -28,12 +28,8 @@ public class PetrolHealth : MonoBehaviour
         if (stationHealth == 0)
         {
             isDestroyed = true;
-            // change material or meshes OR not necessary and just keep on PlayerInteract
+            // Change material or meshes OR not necessary and just keep on PlayerInteract
         }
 
     }
-
-
-
-
 }
