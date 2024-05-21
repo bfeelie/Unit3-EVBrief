@@ -19,7 +19,6 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody enemyRb;
     private EnemyAwareness enemyAwareness;
 
-
     void Awake()
     {
         enemyRb = GetComponent<Rigidbody>();
@@ -59,7 +58,6 @@ public class EnemyMovement : MonoBehaviour
 
 
 
-
         if (changeDirectionCooldown <= 0)
         {
             float angleChange = Random.Range(-90f, 90f);
@@ -67,7 +65,7 @@ public class EnemyMovement : MonoBehaviour
             targetDirection = rotation * targetDirection;
 
             changeDirectionCooldown = Random.Range(1, 5);
-            Debug.Log("Picked new direction at random: " + angleChange);
+            //Debug.Log("Picked new direction at random: " + angleChange);
         }
     }
 
@@ -75,7 +73,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (enemyAwareness.AwareofPlayer)
         {
-            targetDirection = enemyAwareness.DirectionOfPlayer;
+            targetDirection = enemyAwareness.DesiredDir;
         }
     }
 
