@@ -12,6 +12,7 @@ public class KillPlayer : MonoBehaviour
         {
             Time.timeScale = 0;
             loseMenu.SetActive(true);
+            Debug.Log("Game over!");
         }
     }
     

@@ -7,24 +7,14 @@ public class ChargerHealth : MonoBehaviour
     [Header("Charger Station Stats")]
     public int chargerHealth = 50;
     public int maxHealth = 50;
-    public int regenAmount = 10;
-    public int useAmount = 10;
 
     [Header("Particles")]
     public GameObject[] zapParticles;
     public int zapIndex = 0;
 
-    ChargerBar chargerBar;
-
     private void Awake()
     {
-        chargerBar = gameObject.GetComponentInChildren<ChargerBar>();
-    }
-
-    public void DepleteEnergy()
-    {
-        chargerHealth -= useAmount;
-        chargerBar.SetEnergy(useAmount);
+        chargerHealth = 50;
     }
 
     // May not be necessary until need to halt/start charge? Though charge can just stop when it reaches 100 in exit?
