@@ -98,7 +98,6 @@ public class PlayerInteract : MonoBehaviour
         {
             if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
             {
-
                 Debug.Log("Charger not needed.");
                 isAtCharger = false;
                 currentCharger = null;
@@ -106,10 +105,10 @@ public class PlayerInteract : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
             {
-                if (playerEnergy.currentEnergy >= 100)
+                if (playerEnergy.currentEnergy == 100)
                 {
                     Debug.Log("Charger not needed.");
-                    return;
+                    //return;
                 }
                 else
                     playerEnergy.AddEnergy(10);
