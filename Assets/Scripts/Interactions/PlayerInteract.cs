@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
@@ -19,7 +20,7 @@ public class PlayerInteract : MonoBehaviour
     private Transform playerCarCam;
 
     // Could be public later if you need other things to call into it from outside
-    [HideInInspector]  private Player_Energy playerEnergy;
+    [HideInInspector] private Player_Energy playerEnergy;
 
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
@@ -42,12 +43,19 @@ public class PlayerInteract : MonoBehaviour
 
     private RaycastHit hit;
 
+    private int damagePerAttack = 10;
+
     // Just to make sure the scripts are recognised by the script after start.
     private void Start()
     {
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
         chargerParticles.Stop();
+
+        // figure out how much damage to do per attack
+        // each attack should be PetrolStationTotalHealth / NumberOfSmoke
+        //damagePerAttack = 
+
     }
 
     private void Update()
@@ -75,10 +83,21 @@ public class PlayerInteract : MonoBehaviour
                 chargerParticles.gameObject.SetActive(true);
                 chargerParticles.Play();
 
-                // turn on another smoke particle -- remember to keep particle number the same as array amt
-                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
-                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
-                currentPetrolStation.smokeIndex++;
+                // if smokeIndex is too large (out of bounds of the list), don't try to turn it off
+
+                if (currentPetrolStation.smokeIndex < currentPetrolStation.smokeParticles.Length)
+                {
+                    // turn on another smoke particle -- remember to keep particle number the same as array amt
+                    currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
+                    currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
+                    currentPetrolStation.smokeIndex++;
+                    Debug.Log("Spawned particles in index.");
+                }
+                else
+                {
+                    Debug.Log("Trynig to turn on smoke particle that doesn't exist: " + currentPetrolStation.smokeIndex);
+                }
+
 
                 // check if Petrol Station is dead now
                 if (currentPetrolStation.stationHealth <= 0)
@@ -117,13 +136,13 @@ public class PlayerInteract : MonoBehaviour
                 }
                 else
                     playerEnergy.AddEnergy(10);
-                    currentCharger.chargerHealth -= 10;
-                    Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
-                    Debug.Log("Player has " + playerEnergy.currentEnergy);
-                    playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
+                currentCharger.chargerHealth -= 10;
+                Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
+                Debug.Log("Player has " + playerEnergy.currentEnergy);
+                playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
 
                 // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
-                //currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
+                currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
                 currentCharger.GetComponentInChildren<ParticleSystem>().Play();
             }
         }
@@ -139,7 +158,7 @@ public class PlayerInteract : MonoBehaviour
     {
         // See raycast in editor to check that it's working
         //Debug.DrawRay(playerCarCam.position, playerCarCam.forward * hitRange, Color.red);
-        
+
         // Checks if in proximity (using the 'interaction spot' collider); if true then show UI object (UI object must be added in inspector slot)
         if (isAtPetrolStation)
         {
