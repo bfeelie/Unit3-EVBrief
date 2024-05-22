@@ -19,11 +19,15 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody enemyRb;
     private EnemyAwareness enemyAwareness;
 
+    // keep the car on the ground
+    private float yHeight = 0f;
+
     void Awake()
     {
         enemyRb = GetComponent<Rigidbody>();
         enemyAwareness = GetComponent<EnemyAwareness>();
         targetDirection = transform.forward;
+        yHeight = transform.position.y;
     }
 
     // Call these functions
@@ -32,7 +36,15 @@ public class EnemyMovement : MonoBehaviour
         UpdateTargetDirection();
         RotateToTarget();
         SetVelocity();
+        KeepCarOnGroundHeight();
     }
+
+    void KeepCarOnGroundHeight()
+    {
+        // for car to the starting height (ground)
+        transform.position = new Vector3 (transform.position.x, yHeight, transform.position.z);
+    }
+
 
     void UpdateTargetDirection()
     {
