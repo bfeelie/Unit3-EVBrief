@@ -12,6 +12,7 @@ public class ChargerHealth : MonoBehaviour
 
     [Header("Particles")]
     public GameObject[] zapParticles;
+    public int zapIndex = 0;
 
     ChargerBar chargerBar;
 

@@ -69,7 +69,7 @@ public class PlayerInteract : MonoBehaviour
 
                 // turn on another smoke particle -- remember to keep particle number the same as array amt
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
-                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
+                //currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
                 currentPetrolStation.smokeIndex++;
 
@@ -120,10 +120,8 @@ public class PlayerInteract : MonoBehaviour
                     Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
 
                     // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
-                    //currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
-                    //currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
-
-                    // Check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
+                    currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
+                    currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
             }
         }
     }
