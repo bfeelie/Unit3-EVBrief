@@ -650,6 +650,7 @@ GameObject:
   - component: {fileID: 5426824}
   - component: {fileID: 1306550068}
   - component: {fileID: 1306550069}
+  - component: {fileID: 1056421735323838870}
   m_Layer: 0
   m_Name: veh_lunch1
   m_TagString: Untagged
@@ -702,6 +703,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awarenessDistance: 60
+  enemyRadius: 0
+  avoidPower: 0
 --- !u!114 &1306550069
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -716,6 +719,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 10
   rotationSpeed: 60
+--- !u!114 &1056421735323838870
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 126850}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24223201fb07d794a83292125967cf0c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loseMenu: {fileID: 0}
 --- !u!1 &126852
 GameObject:
   m_ObjectHideFlags: 0
