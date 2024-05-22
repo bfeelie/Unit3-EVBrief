@@ -30,6 +30,7 @@ public class PlayerInteract : MonoBehaviour
     public bool isAtCharger = false;
     public ChargerHealth currentCharger;
     public GameObject chargerInteractUI;
+    public ParticleSystem chargeParticle;
 
     [SerializeField]
     [Min(1)]
@@ -104,7 +105,7 @@ public class PlayerInteract : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
             {
-                if (playerEnergy.currentEnergy >= 100)
+                if (playerEnergy.currentEnergy == 100)
                 {
                     Debug.Log("Charger not needed.");
                     return;
@@ -122,8 +123,11 @@ public class PlayerInteract : MonoBehaviour
                     // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
                     currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
                     currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
+                    gameObject.GetComponentInChildren<GameObject>(chargeParticle).SetActive(true);
+                    chargeParticle.Play();
             }
         }
+
     }
 
 
@@ -206,7 +210,7 @@ public class PlayerInteract : MonoBehaviour
         }
         else
         {
-            Debug.Log("(Petrol) Touched something else: " + other.gameObject.name);
+            //Debug.Log("(Petrol) Touched something else: " + other.gameObject.name);
         }
 
         if (other.gameObject.GetComponent<ChargerHealth>())
@@ -222,7 +226,7 @@ public class PlayerInteract : MonoBehaviour
         else
         {
             // Checking for incorrect collision - difference between both building checks
-            Debug.Log("(Charger) Touched something else: " + other.gameObject.name);
+            //Debug.Log("(Charger) Touched something else: " + other.gameObject.name);
         }
 
     }

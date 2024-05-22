@@ -48,7 +48,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1174632915756282594
 RectTransform:
   m_ObjectHideFlags: 0
@@ -503,7 +503,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9113472387117675861}
   - component: {fileID: 4787179460101667098}
-  - component: {fileID: 718586608230413691}
   m_Layer: 0
   m_Name: PowerStation (v3.1)
   m_TagString: Untagged
@@ -547,23 +546,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 19.6, y: 3, z: 32}
   m_Center: {x: -6.2, y: 1, z: 0}
---- !u!114 &718586608230413691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9113472387117675862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffb9bac46d7577a479401a41673f8cad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chargerHealth: 100
-  maxHealth: 100
-  regenAmount: 10
-  useAmount: 10
-  zapParticles: []
 --- !u!1 &9113472387251412328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1145,7 +1127,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3434617160390138857, guid: f67decc83c720874c9c83a3ee44579c8, type: 3}
       propertyPath: m_AnchorMax.y
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3434617161069824706, guid: f67decc83c720874c9c83a3ee44579c8, type: 3}
       propertyPath: m_Pivot.x
@@ -1346,6 +1328,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 373789cb17aaa2846a4c8308e62d8081, type: 3}
+--- !u!1 &5739554108046760583 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2032724492507991105, guid: 373789cb17aaa2846a4c8308e62d8081, type: 3}
+  m_PrefabInstance: {fileID: 6022243072063968966}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5742782282907298177 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2026963043127574343, guid: 373789cb17aaa2846a4c8308e62d8081, type: 3}
@@ -7365,6 +7352,43 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 402930, guid: d5ae5f113475c4d958e3ba8ecc68c194, type: 3}
   m_PrefabInstance: {fileID: 9113472386997179499}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &9113472386997274233 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 102930, guid: d5ae5f113475c4d958e3ba8ecc68c194, type: 3}
+  m_PrefabInstance: {fileID: 9113472386997179499}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &566496828468661516
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113472386997274233}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 16.077618, y: 6.08316, z: 10.85377}
+  m_Center: {x: -3.812936, y: 2.54158, z: 2.8761332}
+--- !u!114 &3625165178847271662
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9113472386997274233}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ffb9bac46d7577a479401a41673f8cad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chargerHealth: 50
+  maxHealth: 50
+  regenAmount: 10
+  useAmount: 10
+  zapParticles:
+  - {fileID: 5739554108046760583}
+  zapIndex: 0
 --- !u!1001 &9113472386997210356
 PrefabInstance:
   m_ObjectHideFlags: 0
