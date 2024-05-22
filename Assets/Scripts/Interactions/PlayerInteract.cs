@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -30,6 +31,7 @@ public class PlayerInteract : MonoBehaviour
     public bool isAtCharger = false;
     public ChargerHealth currentCharger;
     public GameObject chargerInteractUI;
+    public ParticleSystem chargerParticles;
 
     [SerializeField]
     [Min(1)]
@@ -69,7 +71,6 @@ public class PlayerInteract : MonoBehaviour
 
                 // turn on another smoke particle -- remember to keep particle number the same as array amt
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
-                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
                 currentPetrolStation.smokeIndex++;
 
@@ -93,6 +94,7 @@ public class PlayerInteract : MonoBehaviour
     public void UseCharger()
     {
         if (isAtCharger == true)
+            Debug.Log("Is IS at charger");
         {
             if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
             {
@@ -109,19 +111,18 @@ public class PlayerInteract : MonoBehaviour
                     Debug.Log("Charger not needed.");
                     return;
                 }
-
+                else
                     playerEnergy.AddEnergy(10);
-                    currentCharger.DepleteEnergy();
-                    Debug.Log("Player has " + playerEnergy.currentEnergy);
-                    playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
-                    // Add tell to use ChargerHealth's Deplete energy later
-
                     currentCharger.chargerHealth -= 10;
                     Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
-
+                    Debug.Log("Player has " + playerEnergy.currentEnergy);
+                    playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
+                   
                     // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
-                    //currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
-                    //currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
+                    currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
+                    currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
+                    gameObject.SetActive(true);
+                    chargerParticles.Play();
 
                     // Check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
             }
@@ -157,7 +158,7 @@ public class PlayerInteract : MonoBehaviour
             }
         }
 
-        // Checks if in proximity (using the 'interaction spot' collider); if true then show UI object (UI object must be added in inspector slot)
+        // Checks if in proximity if true then show UI object (UI object must be added in inspector slot)
         if (isAtCharger)
         {
             chargerInteractUI.SetActive(true);
@@ -211,7 +212,7 @@ public class PlayerInteract : MonoBehaviour
             Debug.Log("(Petrol) Touched something else: " + other.gameObject.name);
         }
 
-        if (other.gameObject.GetComponent<ChargerHealth>())
+        if (other.gameObject.GetComponentInChildren<ChargerHealth>())
         {
             Debug.Log("We are at Charger Station: " + other.gameObject.name);
 
@@ -244,7 +245,7 @@ public class PlayerInteract : MonoBehaviour
         }
 
         // Check if it's a charger
-        if (other.gameObject.GetComponent<ChargerHealth>())
+        if (other.gameObject.GetComponentInChildren<ChargerHealth>())
         {
             Debug.Log("Left the Charger: " + other.gameObject.name);
 
