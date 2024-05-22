@@ -47,6 +47,7 @@ public class PlayerInteract : MonoBehaviour
     {
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
+        chargerParticles.Stop();
     }
 
     private void Update()
@@ -120,10 +121,10 @@ public class PlayerInteract : MonoBehaviour
                     Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
                     Debug.Log("Player has " + playerEnergy.currentEnergy);
                     playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
-                   
-                    // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
-                    currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
-                    currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
+
+                // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
+                //currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
+                currentCharger.GetComponentInChildren<ParticleSystem>().Play();
             }
         }
 
