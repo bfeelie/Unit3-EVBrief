@@ -118,24 +118,20 @@ public class PlayerInteract : MonoBehaviour
     // Calls on invisible charger 'health' bar from ChargerHealth script; fills Electricity bar
     public void UseCharger()
     {
-        if (isAtCharger == true)
+        if (isAtCharger)
         {
             if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
             {
                 Debug.Log("Charger not needed.");
                 isAtCharger = false;
                 currentCharger = null;
+                return;
             }
 
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
             {
-                if (playerEnergy.currentEnergy == 100)
-                {
-                    Debug.Log("Charger not needed.");
-                    //return;
-                }
-                else
-                    playerEnergy.AddEnergy(10);
+
+                playerEnergy.AddEnergy(10);
                 currentCharger.chargerHealth -= 10;
                 Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
                 Debug.Log("Player has " + playerEnergy.currentEnergy);
@@ -143,11 +139,12 @@ public class PlayerInteract : MonoBehaviour
 
                 // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
                 currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
-                currentCharger.GetComponentInChildren<ParticleSystem>().Play();
+                currentCharger.zapParticles[currentCharger.zapIndex].GetComponentInChildren<ParticleSystem>().Play();
+
+
             }
         }
-
-        if (!isAtCharger)
+        else
         {
             chargerParticles.gameObject.SetActive(false);
         }
