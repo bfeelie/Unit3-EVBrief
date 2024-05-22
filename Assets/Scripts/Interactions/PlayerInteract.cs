@@ -11,6 +11,7 @@ public class PlayerInteract : MonoBehaviour
 
     [SerializeField]
     private LayerMask petrolStationLayerMask;
+    private LayerMask chargerStationLayerMask;
 
     // Uses non-player visible camera for raycast (set to display 8)
     [SerializeField]
@@ -26,6 +27,7 @@ public class PlayerInteract : MonoBehaviour
     public bool isAtPetrolStation = false;
     [SerializeField] PetrolHealth currentPetrolStation;
     [SerializeField] GameObject petrolInteractUI;
+    public ParticleSystem petrolParticles;
 
     [Header("Charging Station")]
     public bool isAtCharger = false;
@@ -69,6 +71,9 @@ public class PlayerInteract : MonoBehaviour
                 Debug.Log("Petrol Station has been hit and now has " + currentPetrolStation.stationHealth + " health.");
                 playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
 
+                chargerParticles.gameObject.SetActive(true);
+                chargerParticles.Play();
+
                 // turn on another smoke particle -- remember to keep particle number the same as array amt
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
                 currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
@@ -94,7 +99,6 @@ public class PlayerInteract : MonoBehaviour
     public void UseCharger()
     {
         if (isAtCharger == true)
-            Debug.Log("Is IS at charger");
         {
             if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
             {
@@ -120,11 +124,12 @@ public class PlayerInteract : MonoBehaviour
                     // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
                     currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
                     currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
-                    gameObject.SetActive(true);
-                    chargerParticles.Play();
-
-                    // Check if Charger is empty now -- turns off bool and empties charger reference in spector (null)
             }
+        }
+
+        if (!isAtCharger)
+        {
+            chargerParticles.gameObject.SetActive(false);
         }
     }
 
@@ -188,7 +193,14 @@ public class PlayerInteract : MonoBehaviour
         {
             // Highlight currently not working 14 May
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-            petrolInteractUI.SetActive(true);
+            //petrolInteractUI.SetActive(true);
+        }
+
+        if (Physics.Raycast(playerCarCam.position, playerCarCam.forward, out hit, hitRange, chargerStationLayerMask))
+        {
+            // Highlight currently not working 14 May
+            hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
+            //chargerInteractUI.SetActive(true);
         }
 
     }
