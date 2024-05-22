@@ -138,7 +138,7 @@ public class PlayerInteract : MonoBehaviour
         if (isAtPetrolStation)
         {
             petrolInteractUI.SetActive(true);
-            Debug.Log("Activated UI");
+            //Debug.Log("Activated UI");
         }
 
         // Set UI as false if not at Petrol Station so player can't use it

@@ -16,7 +16,7 @@ public class ChargerBar : MonoBehaviour
 
     private void Start()
     {
-        SetMaxEnergy(100);
+        SetMaxEnergy(50);
     }
 
     // Placed first to start at max value
@@ -24,9 +24,9 @@ public class ChargerBar : MonoBehaviour
     {
         slider.value = energy;
 
-        if (slider.maxValue >= 100)
+        if (slider.maxValue >= 50)
         {
-            slider.maxValue = 100;
+            slider.maxValue = 50;
         }
     }
 
@@ -48,7 +48,7 @@ public class ChargerBar : MonoBehaviour
         if (energy > 0)
         {
             slider.value = energy--;
-            Debug.Log("Removing from charger.");
+            Debug.Log("Removing" + energy + "from charger.");
         }
     }
 }
