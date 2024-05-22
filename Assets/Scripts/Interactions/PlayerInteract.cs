@@ -118,24 +118,20 @@ public class PlayerInteract : MonoBehaviour
     // Calls on invisible charger 'health' bar from ChargerHealth script; fills Electricity bar
     public void UseCharger()
     {
-        if (isAtCharger == true)
+        if (isAtCharger)
         {
             if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
             {
                 Debug.Log("Charger not needed.");
                 isAtCharger = false;
                 currentCharger = null;
+                return;
             }
 
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
             {
-                if (playerEnergy.currentEnergy == 100)
-                {
-                    Debug.Log("Charger not needed.");
-                    //return;
-                }
-                else
-                    playerEnergy.AddEnergy(10);
+
+                playerEnergy.AddEnergy(10);
                 currentCharger.chargerHealth -= 10;
                 Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
                 Debug.Log("Player has " + playerEnergy.currentEnergy);
@@ -143,11 +139,10 @@ public class PlayerInteract : MonoBehaviour
 
                 // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
                 currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
-                currentCharger.GetComponentInChildren<ParticleSystem>().Play();
+                currentCharger.zapParticles[currentCharger.zapIndex].GetComponentInChildren<ParticleSystem>().Play();
             }
         }
-
-        if (!isAtCharger)
+        else
         {
             chargerParticles.gameObject.SetActive(false);
         }
@@ -180,6 +175,12 @@ public class PlayerInteract : MonoBehaviour
                 currentPetrolStation.stationHealth = 0;
                 petrolInteractUI.SetActive(false);
             }
+
+            if (isAtPetrolStation)
+            {
+                currentCharger.chargerHealth = 0;
+                petrolInteractUI.SetActive(false);
+            }
         }
 
         // Checks if in proximity if true then show UI object (UI object must be added in inspector slot)
@@ -205,22 +206,19 @@ public class PlayerInteract : MonoBehaviour
         if (hit.collider != null)
         {
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
-
         }
 
         // The raycast hits based on player's position and within range, only check interactionLayerMask - out 'saves' the hit to check
         if (Physics.Raycast(playerCarCam.position, playerCarCam.forward, out hit, hitRange, petrolStationLayerMask))
         {
             // Highlight currently not working 14 May
-            hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-            //petrolInteractUI.SetActive(true);
+            hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);     
         }
 
         if (Physics.Raycast(playerCarCam.position, playerCarCam.forward, out hit, hitRange, chargerStationLayerMask))
         {
             // Highlight currently not working 14 May
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-            //chargerInteractUI.SetActive(true);
         }
 
     }
@@ -240,7 +238,7 @@ public class PlayerInteract : MonoBehaviour
         }
         else
         {
-            Debug.Log("(Petrol) Touched something else: " + other.gameObject.name);
+            //Debug.Log("(Petrol) Touched something else: " + other.gameObject.name);
         }
 
         if (other.gameObject.GetComponentInChildren<ChargerHealth>())
