@@ -1,6 +1,8 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -10,6 +12,7 @@ public class PlayerInteract : MonoBehaviour
 
     [SerializeField]
     private LayerMask petrolStationLayerMask;
+    private LayerMask chargerStationLayerMask;
 
     // Uses non-player visible camera for raycast (set to display 8)
     [SerializeField]
@@ -17,7 +20,7 @@ public class PlayerInteract : MonoBehaviour
     private Transform playerCarCam;
 
     // Could be public later if you need other things to call into it from outside
-    [HideInInspector]  private Player_Energy playerEnergy;
+    [HideInInspector] private Player_Energy playerEnergy;
 
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
@@ -25,12 +28,13 @@ public class PlayerInteract : MonoBehaviour
     public bool isAtPetrolStation = false;
     [SerializeField] PetrolHealth currentPetrolStation;
     [SerializeField] GameObject petrolInteractUI;
+    public ParticleSystem petrolParticles;
 
     [Header("Charging Station")]
     public bool isAtCharger = false;
     public ChargerHealth currentCharger;
     public GameObject chargerInteractUI;
-    public ParticleSystem chargeParticle;
+    public ParticleSystem chargerParticles;
 
     [SerializeField]
     [Min(1)]
@@ -39,11 +43,19 @@ public class PlayerInteract : MonoBehaviour
 
     private RaycastHit hit;
 
+    private int damagePerAttack = 10;
+
     // Just to make sure the scripts are recognised by the script after start.
     private void Start()
     {
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
+        chargerParticles.Stop();
+
+        // figure out how much damage to do per attack
+        // each attack should be PetrolStationTotalHealth / NumberOfSmoke
+        //damagePerAttack = 
+
     }
 
     private void Update()
@@ -68,11 +80,24 @@ public class PlayerInteract : MonoBehaviour
                 Debug.Log("Petrol Station has been hit and now has " + currentPetrolStation.stationHealth + " health.");
                 playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
 
-                // turn on another smoke particle -- remember to keep particle number the same as array amt
-                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
-                //currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
-                currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
-                currentPetrolStation.smokeIndex++;
+                chargerParticles.gameObject.SetActive(true);
+                chargerParticles.Play();
+
+                // if smokeIndex is too large (out of bounds of the list), don't try to turn it off
+
+                if (currentPetrolStation.smokeIndex < currentPetrolStation.smokeParticles.Length)
+                {
+                    // turn on another smoke particle -- remember to keep particle number the same as array amt
+                    currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
+                    currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
+                    currentPetrolStation.smokeIndex++;
+                    Debug.Log("Spawned particles in index.");
+                }
+                else
+                {
+                    Debug.Log("Trynig to turn on smoke particle that doesn't exist: " + currentPetrolStation.smokeIndex);
+                }
+
 
                 // check if Petrol Station is dead now
                 if (currentPetrolStation.stationHealth <= 0)
@@ -93,41 +118,34 @@ public class PlayerInteract : MonoBehaviour
     // Calls on invisible charger 'health' bar from ChargerHealth script; fills Electricity bar
     public void UseCharger()
     {
-        if (isAtCharger == true)
+        if (isAtCharger)
         {
             if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
             {
-
                 Debug.Log("Charger not needed.");
                 isAtCharger = false;
                 currentCharger = null;
+                return;
             }
 
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
             {
-                if (playerEnergy.currentEnergy == 100)
-                {
-                    Debug.Log("Charger not needed.");
-                    return;
-                }
 
-                    playerEnergy.AddEnergy(10);
-                    currentCharger.DepleteEnergy();
-                    Debug.Log("Player has " + playerEnergy.currentEnergy);
-                    playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
-                    // Add tell to use ChargerHealth's Deplete energy later
+                playerEnergy.AddEnergy(10);
+                currentCharger.chargerHealth -= 10;
+                Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
+                Debug.Log("Player has " + playerEnergy.currentEnergy);
+                playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
 
-                    currentCharger.chargerHealth -= 10;
-                    Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
-
-                    // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
-                    currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
-                    currentCharger.zapParticles[currentCharger.zapIndex].GetComponent<ParticleSystem>().Play();
-                    gameObject.GetComponentInChildren<GameObject>(chargeParticle).SetActive(true);
-                    chargeParticle.Play();
+                // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
+                currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
+                currentCharger.zapParticles[currentCharger.zapIndex].GetComponentInChildren<ParticleSystem>().Play();
             }
         }
-
+        else
+        {
+            chargerParticles.gameObject.SetActive(false);
+        }
     }
 
 
@@ -135,7 +153,7 @@ public class PlayerInteract : MonoBehaviour
     {
         // See raycast in editor to check that it's working
         //Debug.DrawRay(playerCarCam.position, playerCarCam.forward * hitRange, Color.red);
-        
+
         // Checks if in proximity (using the 'interaction spot' collider); if true then show UI object (UI object must be added in inspector slot)
         if (isAtPetrolStation)
         {
@@ -157,9 +175,15 @@ public class PlayerInteract : MonoBehaviour
                 currentPetrolStation.stationHealth = 0;
                 petrolInteractUI.SetActive(false);
             }
+
+            if (isAtPetrolStation)
+            {
+                currentCharger.chargerHealth = 0;
+                petrolInteractUI.SetActive(false);
+            }
         }
 
-        // Checks if in proximity (using the 'interaction spot' collider); if true then show UI object (UI object must be added in inspector slot)
+        // Checks if in proximity if true then show UI object (UI object must be added in inspector slot)
         if (isAtCharger)
         {
             chargerInteractUI.SetActive(true);
@@ -182,15 +206,19 @@ public class PlayerInteract : MonoBehaviour
         if (hit.collider != null)
         {
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(false);
-
         }
 
         // The raycast hits based on player's position and within range, only check interactionLayerMask - out 'saves' the hit to check
         if (Physics.Raycast(playerCarCam.position, playerCarCam.forward, out hit, hitRange, petrolStationLayerMask))
         {
             // Highlight currently not working 14 May
+            hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);     
+        }
+
+        if (Physics.Raycast(playerCarCam.position, playerCarCam.forward, out hit, hitRange, chargerStationLayerMask))
+        {
+            // Highlight currently not working 14 May
             hit.collider.GetComponent<Highlight>()?.ToggleHighlight(true);
-            petrolInteractUI.SetActive(true);
         }
 
     }
@@ -213,7 +241,7 @@ public class PlayerInteract : MonoBehaviour
             //Debug.Log("(Petrol) Touched something else: " + other.gameObject.name);
         }
 
-        if (other.gameObject.GetComponent<ChargerHealth>())
+        if (other.gameObject.GetComponentInChildren<ChargerHealth>())
         {
             Debug.Log("We are at Charger Station: " + other.gameObject.name);
 
@@ -226,7 +254,7 @@ public class PlayerInteract : MonoBehaviour
         else
         {
             // Checking for incorrect collision - difference between both building checks
-            //Debug.Log("(Charger) Touched something else: " + other.gameObject.name);
+            Debug.Log("(Charger) Touched something else: " + other.gameObject.name);
         }
 
     }
@@ -246,7 +274,7 @@ public class PlayerInteract : MonoBehaviour
         }
 
         // Check if it's a charger
-        if (other.gameObject.GetComponent<ChargerHealth>())
+        if (other.gameObject.GetComponentInChildren<ChargerHealth>())
         {
             Debug.Log("Left the Charger: " + other.gameObject.name);
 
