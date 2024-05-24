@@ -42,23 +42,4 @@ public class EnergyBar : MonoBehaviour
             slider.value = 0;
         }
     }
-
-    /*public void AddEnergy(int energy)
-    {
-        if (energy <= 0)
-        {
-            slider.value = energy++;
-        }
-        else
-            Debug.Log("Did not add energy");
-    }*/
-
-    // Not used yet
-    /*public void EnergyOut(int depleted)
-    {
-        if (slider.minValue <= 0)
-        {
-            isEmpty = true;
-        }    
-    }*/
 }

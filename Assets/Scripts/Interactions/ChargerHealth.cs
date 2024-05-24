@@ -5,25 +5,17 @@ using UnityEngine;
 public class ChargerHealth : MonoBehaviour
 {
     [Header("Charger Station Stats")]
-    public int chargerHealth = 100;
-    public int maxHealth = 100;
-    public int regenAmount = 10;
+    public int chargerHealth = 50;
+    public int maxHealth = 50;
 
-    PlayerInteract player;
+    [Header("Particles")]
+    public GameObject[] zapParticles;
+    public int zapIndex = 0;
 
     private void Awake()
     {
-        player = gameObject.GetComponent<PlayerInteract>();
+        chargerHealth = 50;
     }
-
-    // Started in case I needed to tell this to stop
-    /*void PlayerFull()
-    {
-        if (playerEnergy.currentEnergy == 100)
-        {
-
-        }
-    }*/
 
     // May not be necessary until need to halt/start charge? Though charge can just stop when it reaches 100 in exit?
     /*private void OnTriggerEnter(Collider other)
