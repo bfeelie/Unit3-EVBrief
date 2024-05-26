@@ -19,12 +19,15 @@ public class EnemyMovement : MonoBehaviour
     private Rigidbody enemyRb;
     private EnemyAwareness enemyAwareness;
 
+    // keep the car on the ground
+    private float yHeight = 0f;
 
     void Awake()
     {
         enemyRb = GetComponent<Rigidbody>();
         enemyAwareness = GetComponent<EnemyAwareness>();
         targetDirection = transform.forward;
+        yHeight = transform.position.y;
     }
 
     // Call these functions
@@ -33,7 +36,15 @@ public class EnemyMovement : MonoBehaviour
         UpdateTargetDirection();
         RotateToTarget();
         SetVelocity();
+        KeepCarOnGroundHeight();
     }
+
+    void KeepCarOnGroundHeight()
+    {
+        // for car to the starting height (ground)
+        transform.position = new Vector3 (transform.position.x, yHeight, transform.position.z);
+    }
+
 
     void UpdateTargetDirection()
     {
@@ -59,7 +70,6 @@ public class EnemyMovement : MonoBehaviour
 
 
 
-
         if (changeDirectionCooldown <= 0)
         {
             float angleChange = Random.Range(-90f, 90f);
@@ -67,7 +77,7 @@ public class EnemyMovement : MonoBehaviour
             targetDirection = rotation * targetDirection;
 
             changeDirectionCooldown = Random.Range(1, 5);
-            Debug.Log("Picked new direction at random: " + angleChange);
+            //Debug.Log("Picked new direction at random: " + angleChange);
         }
     }
 
@@ -75,7 +85,7 @@ public class EnemyMovement : MonoBehaviour
     {
         if (enemyAwareness.AwareofPlayer)
         {
-            targetDirection = enemyAwareness.DirectionOfPlayer;
+            targetDirection = enemyAwareness.DesiredDir;
         }
     }
 
