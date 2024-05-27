@@ -22,6 +22,7 @@ public class PetrolHealth : MonoBehaviour
     private void Start()
     {
         currentHealth = maxHealth;
+        petrolBar = GameObject.Find("Canvas/PetrolStationUI/Slider").GetComponent<PetrolBar>();
         petrolBar.SetMaxHealth(maxHealth);
     }
 

@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 
 public class ChargerHealth : MonoBehaviour
@@ -17,6 +18,7 @@ public class ChargerHealth : MonoBehaviour
     private void Start()
     {
         currentEnergy = maxEnergy;
+        chargerBar = GameObject.Find("Canvas/ChargerUI/Slider").GetComponent<ChargerBar>();
         chargerBar.SetMaxEnergy(maxEnergy);
     }
 
@@ -31,4 +33,6 @@ public class ChargerHealth : MonoBehaviour
             isEmpty = true;
         }
     }
+
+    //void WhyIsItBeingAnAss()
 }

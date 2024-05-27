@@ -14,11 +14,6 @@ public class ChargerBar : MonoBehaviour
     [Header("Cause/Effect Variable")]
     public bool isEmpty = false;
 
-    private void Start()
-    {
-        SetMaxEnergy(50);
-    }
-
     // Placed first to start at max value
     public void SetMaxEnergy(int energy)
     {

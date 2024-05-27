@@ -47,9 +47,9 @@ public class PlayerInteract : MonoBehaviour
     // Just to make sure the scripts are recognised by the script after start.
     private void Start()
     {
+        petrolBar = GameObject.Find("Canvas/PetrolStationUI/Slider").GetComponent<PetrolBar>();
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
-        petrolBar = gameObject.GetComponent<PetrolBar>();
         chargerBar = gameObject.GetComponent<ChargerBar>();
         chargerParticles.Stop();
     }
@@ -100,7 +100,6 @@ public class PlayerInteract : MonoBehaviour
                 if (currentPetrolStation.currentHealth <= 0)
                 {
                     Debug.Log("Petrol Station destroyed.");
-                    //currentPetrolStation.DestroyPetrolStation();
                     AtPetrol = false;
                     currentPetrolStation = null;
                 }

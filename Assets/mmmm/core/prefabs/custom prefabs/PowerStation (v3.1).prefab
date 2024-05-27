@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 2228677970482521282}
   - component: {fileID: 4724465377295137355}
   - component: {fileID: 1742581875287109759}
-  - component: {fileID: 203360083748586210}
   m_Layer: 3
   m_Name: InteractionSpot
   m_TagString: Untagged
@@ -46,9 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb9bac46d7577a479401a41673f8cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargerHealth: 50
-  maxHealth: 50
   chargerBar: {fileID: 0}
+  currentEnergy: 50
+  maxEnergy: 50
+  isEmpty: 0
   zapParticles:
   - {fileID: 5739368098165947515}
   zapIndex: 0
@@ -65,20 +65,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 15.576118, y: 4.163678, z: 16.054667}
   m_Center: {x: -3.9021873, y: 1.5818388, z: -0.27445698}
---- !u!114 &203360083748586210
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 67628681386536087}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 69f6956db46faca45afed645b81799d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  slider: {fileID: 0}
-  isEmpty: 0
 --- !u!1 &779712922084505511
 GameObject:
   m_ObjectHideFlags: 0
@@ -579,9 +565,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffb9bac46d7577a479401a41673f8cad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chargerHealth: 50
-  maxHealth: 50
   chargerBar: {fileID: 0}
+  currentEnergy: 50
+  maxEnergy: 50
+  isEmpty: 0
   zapParticles:
   - {fileID: 5739554108046760583}
   zapIndex: 0
