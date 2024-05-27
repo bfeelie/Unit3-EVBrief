@@ -23,7 +23,7 @@ public class PetrolHealth : MonoBehaviour
     {
         currentHealth = maxHealth;
         petrolBar = GameObject.Find("Canvas/PetrolStationUI/Slider").GetComponent<PetrolBar>();
-        petrolBar.SetMaxHealth(maxHealth);
+        petrolBar?.SetMaxHealth(maxHealth);
     }
 
     public void TakeDamage(int damage)
@@ -38,17 +38,4 @@ public class PetrolHealth : MonoBehaviour
             // Change material or meshes OR not necessary and just keep on PlayerInteract
         }
     }
-
-    /*
-    // Why did I make this
-    public void TakeHealth(int health)
-    {
-        slider.value = health;
-
-        if (health > 0)
-        {
-            slider.value = health--;
-            Debug.Log("Depleting" + health + "petrol.");
-        }
-    }*/
 }
