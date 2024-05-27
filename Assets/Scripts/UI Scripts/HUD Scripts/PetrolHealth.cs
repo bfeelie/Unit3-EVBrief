@@ -9,8 +9,9 @@ public class PetrolHealth : MonoBehaviour
 {
     // Max health just in as a precaution for starting game
     [Header("Petrol Station Stats")]
-    public int stationHealth = 50;
+    public int currentHealth = 50;
     public int maxHealth = 50;
+    public PetrolBar petrolBar;
 
     public GameObject[] smokeParticles;
     [HideInInspector]
@@ -18,18 +19,35 @@ public class PetrolHealth : MonoBehaviour
 
     public bool isDestroyed = false;
 
-    private void Awake()
+    private void Start()
     {
-        stationHealth = maxHealth;
+        currentHealth = maxHealth;
+        petrolBar.SetMaxHealth(maxHealth);
     }
 
-    public void DestroyPetrolStation()
+    public void TakeDamage(int damage)
     {
-        if (stationHealth == 0)
+        currentHealth -= damage;
+        petrolBar.SetHealth(currentHealth);
+
+        if (currentHealth <= 0)
         {
+            currentHealth = 0;
             isDestroyed = true;
             // Change material or meshes OR not necessary and just keep on PlayerInteract
         }
-
     }
+
+    /*
+    // Why did I make this
+    public void TakeHealth(int health)
+    {
+        slider.value = health;
+
+        if (health > 0)
+        {
+            slider.value = health--;
+            Debug.Log("Depleting" + health + "petrol.");
+        }
+    }*/
 }

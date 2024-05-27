@@ -41,14 +41,4 @@ public class ChargerBar : MonoBehaviour
             isEmpty = true;
         }
     }
-    public void TakeEnergy(int energy)
-    {
-        slider.value = energy;
-
-        if (energy > 0)
-        {
-            slider.value = energy--;
-            Debug.Log("Removing" + energy + "from charger.");
-        }
-    }
 }

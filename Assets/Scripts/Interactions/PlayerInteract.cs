@@ -24,16 +24,17 @@ public class PlayerInteract : MonoBehaviour
 
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
-    [SerializeField]
-    public bool isAtPetrolStation = false;
+    [SerializeField] public bool AtPetrol = false;
     [SerializeField] PetrolHealth currentPetrolStation;
     [SerializeField] GameObject petrolInteractUI;
+    [SerializeField] PetrolBar petrolBar;
     public ParticleSystem petrolParticles;
 
     [Header("Charging Station")]
-    public bool isAtCharger = false;
-    public ChargerHealth currentCharger;
-    public GameObject chargerInteractUI;
+    public bool AtCharger = false;
+    [SerializeField] ChargerHealth currentCharger;
+    [SerializeField] GameObject chargerInteractUI;
+    [SerializeField] ChargerBar chargerBar;
     public ParticleSystem chargerParticles;
 
     [SerializeField]
@@ -48,12 +49,9 @@ public class PlayerInteract : MonoBehaviour
     {
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
+        petrolBar = gameObject.GetComponent<PetrolBar>();
+        chargerBar = gameObject.GetComponent<ChargerBar>();
         chargerParticles.Stop();
-
-        // figure out how much damage to do per attack
-        // each attack should be PetrolStationTotalHealth / NumberOfSmoke
-        //damagePerAttack = 
-
     }
 
     private void Update()
@@ -67,17 +65,18 @@ public class PlayerInteract : MonoBehaviour
     // Calls on invisible health bar from stationHealth script
     public void AttackPetrol()
     {
-        if (isAtPetrolStation == true && Input.GetKeyDown(KeyCode.E))
+        if (AtPetrol == true && Input.GetKeyDown(KeyCode.E))
         {
-
-            if (currentPetrolStation.stationHealth > 0)
+            if (currentPetrolStation.currentHealth > 0)
             {
                 playerEnergy.UseEnergy(10);
-                Debug.Log("Player has " + playerEnergy.currentEnergy);
-                currentPetrolStation.stationHealth -= 10;
-                Debug.Log("Petrol Station has been hit and now has " + currentPetrolStation.stationHealth + " health.");
                 playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
+                Debug.Log("Player has " + playerEnergy.currentEnergy);
 
+                currentPetrolStation.TakeDamage(10);
+                petrolBar.SetHealth(currentPetrolStation.currentHealth);
+                Debug.Log ("Petrol Station has been hit and now has" + currentPetrolStation.currentHealth + " health.");
+                
                 chargerParticles.gameObject.SetActive(true);
                 chargerParticles.Play();
 
@@ -93,16 +92,16 @@ public class PlayerInteract : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("Trynig to turn on smoke particle that doesn't exist: " + currentPetrolStation.smokeIndex);
+                    Debug.Log("Trying to turn on smoke particles that don't exist: " + currentPetrolStation.smokeIndex);
                 }
 
 
                 // check if Petrol Station is dead now
-                if (currentPetrolStation.stationHealth <= 0)
+                if (currentPetrolStation.currentHealth <= 0)
                 {
                     Debug.Log("Petrol Station destroyed.");
-                    currentPetrolStation.DestroyPetrolStation();
-                    isAtPetrolStation = false;
+                    //currentPetrolStation.DestroyPetrolStation();
+                    AtPetrol = false;
                     currentPetrolStation = null;
                 }
             }
@@ -116,24 +115,25 @@ public class PlayerInteract : MonoBehaviour
     // Calls on invisible charger 'health' bar from ChargerHealth script; fills Electricity bar
     public void UseCharger()
     {
-        if (isAtCharger)
+        if (AtCharger)
         {
-            if (playerEnergy.currentEnergy == 100 || currentCharger.chargerHealth == 0)
+            if (playerEnergy.currentEnergy == 100 || currentCharger.currentEnergy == 0)
             {
                 Debug.Log("Charger not needed.");
-                isAtCharger = false;
+                AtCharger = false;
                 currentCharger = null;
                 return;
             }
 
-            if (Input.GetKeyDown(KeyCode.E) && currentCharger.chargerHealth <= 100)
+            if (Input.GetKeyDown(KeyCode.E) && currentCharger.currentEnergy <= 100)
             {
-
+                currentCharger.TakeEnergy(10);
+                chargerBar.SetEnergy(currentCharger.currentEnergy);
+                Debug.Log("Charger used and now has " + currentCharger.currentEnergy + "charges left.");
+                
                 playerEnergy.AddEnergy(10);
-                currentCharger.chargerHealth -= 10;
-                Debug.Log("Charger used and now has " + currentCharger.chargerHealth + "charges left.");
-                Debug.Log("Player has " + playerEnergy.currentEnergy);
                 playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
+                Debug.Log("Player has " + playerEnergy.currentEnergy);
 
                 // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
                 currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
@@ -153,14 +153,14 @@ public class PlayerInteract : MonoBehaviour
         //Debug.DrawRay(playerCarCam.position, playerCarCam.forward * hitRange, Color.red);
 
         // Checks if in proximity (using the 'interaction spot' collider); if true then show UI object (UI object must be added in inspector slot)
-        if (isAtPetrolStation)
+        if (AtPetrol)
         {
             petrolInteractUI.SetActive(true);
             //Debug.Log("Activated UI");
         }
 
         // Set UI as false if not at Petrol Station so player can't use it
-        else if (!isAtPetrolStation)
+        else if (!AtPetrol)
         {
             petrolInteractUI.SetActive(false);
         }
@@ -168,27 +168,27 @@ public class PlayerInteract : MonoBehaviour
         // Turn off UI for dead petrol station
         else
         {
-            if (isAtPetrolStation)
+            if (AtPetrol)
             {
-                currentPetrolStation.stationHealth = 0;
+                currentPetrolStation.currentHealth = 0;
                 petrolInteractUI.SetActive(false);
             }
 
-            if (isAtPetrolStation)
+            if (AtPetrol)
             {
-                currentCharger.chargerHealth = 0;
+                currentCharger.currentEnergy = 0;
                 petrolInteractUI.SetActive(false);
             }
         }
 
         // Checks if in proximity if true then show UI object (UI object must be added in inspector slot)
-        if (isAtCharger)
+        if (AtCharger)
         {
             chargerInteractUI.SetActive(true);
         }
 
         // Set UI as false if not at Charger so player can't use it
-        else if (!isAtCharger)
+        else if (!AtCharger)
         {
             chargerInteractUI.SetActive(false);
         }
@@ -229,7 +229,7 @@ public class PlayerInteract : MonoBehaviour
             Debug.Log("We are at Petrol Station: " + other.gameObject.name);
 
             // If it is, set bool as true
-            isAtPetrolStation = true;
+            AtPetrol = true;
 
             // Make reference to which petrol station we are at - so script will only target THIS station
             currentPetrolStation = other.gameObject.GetComponent<PetrolHealth>();
@@ -244,7 +244,7 @@ public class PlayerInteract : MonoBehaviour
             Debug.Log("We are at Charger Station: " + other.gameObject.name);
 
             // If it is, set isAtPetrolStation = true
-            isAtCharger = true;
+            AtCharger = true;
 
             // Make reference to charger we are at
             currentCharger = other.gameObject.GetComponent<ChargerHealth>();
@@ -266,7 +266,7 @@ public class PlayerInteract : MonoBehaviour
             Debug.Log("Left the Petrol Station: " + other.gameObject.name);
 
             // if it is, set isAtPetrolStation = false
-            isAtPetrolStation = false;
+            AtPetrol = false;
             // blank out petrol station reference
             currentPetrolStation = null;
         }
@@ -277,7 +277,7 @@ public class PlayerInteract : MonoBehaviour
             Debug.Log("Left the Charger: " + other.gameObject.name);
 
             // Same logic as petrol station
-            isAtCharger = false;
+            AtCharger = false;
             currentCharger = null;
         }
 
