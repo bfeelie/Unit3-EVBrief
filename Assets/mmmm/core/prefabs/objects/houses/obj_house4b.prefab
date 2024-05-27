@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 442174}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: obj_house4b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -44,7 +44,7 @@ GameObject:
   - component: {fileID: 442176}
   - component: {fileID: 3342174}
   - component: {fileID: 2342174}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: obj_house4b
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -126,7 +126,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442178}
   - component: {fileID: 6542174}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FrontPillar1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -141,7 +141,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142178}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -1.6, y: 0, z: -6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171,7 +171,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442180}
   - component: {fileID: 6542176}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FrontPillar1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -186,7 +186,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 142180}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0, y: 0, z: -6.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -216,7 +216,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442182}
   - component: {fileID: 6542178}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FrontRoof3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442184}
   - component: {fileID: 6542180}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FrontRoof2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306,7 +306,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442186}
   - component: {fileID: 6542182}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: StairRamp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -351,7 +351,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442188}
   - component: {fileID: 6542184}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FrontStairs
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -396,7 +396,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442190}
   - component: {fileID: 6542186}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: FrontRoof
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -441,7 +441,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442192}
   - component: {fileID: 6542188}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Chimney2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -486,7 +486,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442194}
   - component: {fileID: 6542190}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Chimney1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -531,7 +531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442196}
   - component: {fileID: 6542192}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Roof1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -576,7 +576,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442198}
   - component: {fileID: 6542194}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Roof2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -621,7 +621,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442200}
   - component: {fileID: 6542196}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -666,7 +666,7 @@ GameObject:
   m_Component:
   - component: {fileID: 442202}
   - component: {fileID: 6542198}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Base
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -710,7 +710,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 442204}
-  m_Layer: 6
+  m_Layer: 0
   m_Name: Colliders
   m_TagString: Untagged
   m_Icon: {fileID: 0}
