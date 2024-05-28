@@ -15,7 +15,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &808553357428601354
 RectTransform:
   m_ObjectHideFlags: 0
@@ -203,7 +203,7 @@ GameObject:
   - component: {fileID: 6397363622873097837}
   - component: {fileID: 1671916959240916103}
   m_Layer: 5
-  m_Name: GiveUpText
+  m_Name: QuitText
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -257,7 +257,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Play again
+  m_text: MENU
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce6d5e5980426c2429dc6ffa9ac4d33d, type: 2}
   m_sharedMaterial: {fileID: 1858124540289005706, guid: ce6d5e5980426c2429dc6ffa9ac4d33d, type: 2}
@@ -963,7 +963,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: MENU
+  m_text: RE-ENERGISE
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: ce6d5e5980426c2429dc6ffa9ac4d33d, type: 2}
   m_sharedMaterial: {fileID: 1858124540289005706, guid: ce6d5e5980426c2429dc6ffa9ac4d33d, type: 2}
