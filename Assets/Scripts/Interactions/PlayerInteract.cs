@@ -24,14 +24,14 @@ public class PlayerInteract : MonoBehaviour
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
     [SerializeField] public bool AtPetrol = false;
-    [SerializeField] PetrolHealth currentPetrolStation;
+    [HideInInspector] [SerializeField] PetrolHealth currentPetrolStation;
     [SerializeField] GameObject petrolInteractUI;
     [SerializeField] PetrolBar petrolBar;
     public ParticleSystem petrolParticles;
 
     [Header("Charging Station")]
     public bool AtCharger = false;
-    [SerializeField] ChargerHealth currentCharger;
+    [HideInInspector] [SerializeField] ChargerHealth currentCharger;
     [SerializeField] GameObject chargerInteractUI;
     public ChargerBar chargerBar;
 
