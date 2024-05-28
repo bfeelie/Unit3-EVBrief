@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-
     [SerializeField]
     private LayerMask petrolStationLayerMask;
     private LayerMask chargerStationLayerMask;
@@ -34,16 +33,11 @@ public class PlayerInteract : MonoBehaviour
     public bool AtCharger = false;
     [SerializeField] ChargerHealth currentCharger;
     [SerializeField] GameObject chargerInteractUI;
-    [SerializeField] ChargerBar chargerBar;
+    public ChargerBar chargerBar;
 
     [Header("Player")]
     public ParticleSystem attackParticles;
-
-    [SerializeField]
-    [Min(1)]
-
-    private float hitRange = 3;
-
+    [SerializeField] [Min(1)] private float hitRange = 3;
     private RaycastHit hit;
 
     // Just to make sure the scripts are recognised by the script after start.
@@ -199,7 +193,6 @@ public class PlayerInteract : MonoBehaviour
         {
             return;
         }
-
 
         // If not hitting collider, do not show highlight -- this is currently not working (14 May)
         if (hit.collider != null)
