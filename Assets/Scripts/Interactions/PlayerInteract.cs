@@ -35,7 +35,9 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] ChargerHealth currentCharger;
     [SerializeField] GameObject chargerInteractUI;
     [SerializeField] ChargerBar chargerBar;
-    public ParticleSystem chargerParticles;
+
+    [Header("Player")]
+    public ParticleSystem attackParticles;
 
     [SerializeField]
     [Min(1)]
@@ -51,7 +53,7 @@ public class PlayerInteract : MonoBehaviour
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
         chargerBar = gameObject.GetComponent<ChargerBar>();
-        chargerParticles.Stop();
+        attackParticles.Stop();
     }
 
     private void Update()
@@ -77,14 +79,14 @@ public class PlayerInteract : MonoBehaviour
                 petrolBar.SetHealth(currentPetrolStation.currentHealth);
                 Debug.Log ("Petrol Station has been hit and now has" + currentPetrolStation.currentHealth + " health.");
                 
-                chargerParticles.gameObject.SetActive(true);
-                chargerParticles.Play();
+                attackParticles.gameObject.SetActive(true);
+                attackParticles.Play();
 
-                // if smokeIndex is too large (out of bounds of the list), don't try to turn it off
+                // If smokeIndex is too large (out of bounds of the list), don't try to turn it off
 
                 if (currentPetrolStation.smokeIndex < currentPetrolStation.smokeParticles.Length)
                 {
-                    // turn on another smoke particle -- remember to keep particle number the same as array amt
+                    // Turn on another smoke particle -- remember to keep particle number the same as array amt
                     currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].SetActive(true);
                     currentPetrolStation.smokeParticles[currentPetrolStation.smokeIndex].GetComponent<ParticleSystem>().Play();
                     currentPetrolStation.smokeIndex++;
@@ -93,8 +95,8 @@ public class PlayerInteract : MonoBehaviour
                 else
                 {
                     Debug.Log("Trying to turn on smoke particles that don't exist: " + currentPetrolStation.smokeIndex);
+                    attackParticles.gameObject.SetActive(false);
                 }
-
 
                 // check if Petrol Station is dead now
                 if (currentPetrolStation.currentHealth <= 0)
@@ -102,6 +104,7 @@ public class PlayerInteract : MonoBehaviour
                     Debug.Log("Petrol Station destroyed.");
                     AtPetrol = false;
                     currentPetrolStation = null;
+                    attackParticles.gameObject.SetActive(false);
                 }
             }
         }
@@ -127,12 +130,11 @@ public class PlayerInteract : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E) && currentCharger.currentEnergy <= 100)
             {
                 currentCharger.TakeEnergy(10);
-                chargerBar.SetEnergy(currentCharger.currentEnergy);
-                Debug.Log("Charger used and now has " + currentCharger.currentEnergy + "charges left.");
-                
                 playerEnergy.AddEnergy(10);
                 playerEnergy.energyBar.SetEnergy(playerEnergy.currentEnergy);
                 Debug.Log("Player has " + playerEnergy.currentEnergy);
+                chargerBar.SetEnergy(currentCharger.currentEnergy);
+                Debug.Log("Charger used and now has " + currentCharger.currentEnergy + "charges left.");
 
                 // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
                 currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
@@ -141,7 +143,7 @@ public class PlayerInteract : MonoBehaviour
         }
         else
         {
-            chargerParticles.gameObject.SetActive(false);
+            return;
         }
     }
 
