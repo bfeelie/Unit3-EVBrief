@@ -9,7 +9,6 @@ using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
-
     [SerializeField]
     private LayerMask petrolStationLayerMask;
     private LayerMask chargerStationLayerMask;
@@ -25,31 +24,26 @@ public class PlayerInteract : MonoBehaviour
     // Text pop up telling player how to interact
     [Header("Petrol Station")]
     [SerializeField] public bool AtPetrol = false;
-    [SerializeField] PetrolHealth currentPetrolStation;
+    [HideInInspector] [SerializeField] PetrolHealth currentPetrolStation;
     [SerializeField] GameObject petrolInteractUI;
     [SerializeField] PetrolBar petrolBar;
     public ParticleSystem petrolParticles;
 
     [Header("Charging Station")]
     public bool AtCharger = false;
-    [SerializeField] ChargerHealth currentCharger;
+    [HideInInspector] [SerializeField] ChargerHealth currentCharger;
     [SerializeField] GameObject chargerInteractUI;
-    [SerializeField] ChargerBar chargerBar;
+    public ChargerBar chargerBar;
 
     [Header("Player")]
     public ParticleSystem attackParticles;
-
-    [SerializeField]
-    [Min(1)]
-
-    private float hitRange = 3;
-
+    [SerializeField] [Min(1)] private float hitRange = 3;
     private RaycastHit hit;
 
     // Just to make sure the scripts are recognised by the script after start.
     private void Start()
     {
-        petrolBar = GameObject.Find("Canvas/PetrolStationUI/Slider").GetComponent<PetrolBar>();
+        //petrolBar = GameObject.Find("Canvas/PetrolStationUI/Slider").GetComponent<PetrolBar>();
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
         chargerBar = gameObject.GetComponent<ChargerBar>();
@@ -199,7 +193,6 @@ public class PlayerInteract : MonoBehaviour
         {
             return;
         }
-
 
         // If not hitting collider, do not show highlight -- this is currently not working (14 May)
         if (hit.collider != null)

@@ -704,8 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awarenessDistance: 60
-  enemyRadius: 0
-  avoidPower: 0
+  enemyRadius: 10
+  avoidPower: 4
 --- !u!114 &2595023794344157244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -732,7 +732,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24223201fb07d794a83292125967cf0c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  loseMenu: {fileID: 8226717442565464570, guid: 756d4b014bd354c459c094a0a7e33732, type: 3}
+  loseMenu: {fileID: 0}
 --- !u!65 &4324773365070958534
 BoxCollider:
   m_ObjectHideFlags: 0
