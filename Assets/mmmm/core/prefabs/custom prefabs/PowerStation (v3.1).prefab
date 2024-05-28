@@ -509,7 +509,6 @@ GameObject:
   m_Component:
   - component: {fileID: 9113472387117675861}
   - component: {fileID: 4787179460101667098}
-  - component: {fileID: 718586608230413691}
   m_Layer: 6
   m_Name: PowerStation (v3.1)
   m_TagString: Untagged
@@ -553,25 +552,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 19.6, y: 6.2756443, z: 32}
   m_Center: {x: -6.2, y: 2.6378222, z: 2.5579514e-14}
---- !u!114 &718586608230413691
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9113472387117675862}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ffb9bac46d7577a479401a41673f8cad, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chargerBar: {fileID: 0}
-  currentEnergy: 50
-  maxEnergy: 50
-  isEmpty: 0
-  zapParticles:
-  - {fileID: 5739554108046760583}
-  zapIndex: 0
 --- !u!1 &9113472387251412328
 GameObject:
   m_ObjectHideFlags: 0
@@ -1201,18 +1181,13 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2032724492507991105, guid: 373789cb17aaa2846a4c8308e62d8081, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 373789cb17aaa2846a4c8308e62d8081, type: 3}
 --- !u!1 &5739368098165947515 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2032560264985832125, guid: 373789cb17aaa2846a4c8308e62d8081, type: 3}
-  m_PrefabInstance: {fileID: 6022243072063968966}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &5739554108046760583 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2032724492507991105, guid: 373789cb17aaa2846a4c8308e62d8081, type: 3}
   m_PrefabInstance: {fileID: 6022243072063968966}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &5741499040912602659 stripped
