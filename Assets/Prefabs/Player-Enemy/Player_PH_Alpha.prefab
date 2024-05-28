@@ -354,7 +354,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2348414214541560841}
-  m_LocalRotation: {x: -0.020192547, y: -0.5587422, z: 0.47643843, w: 0.67853206}
+  m_LocalRotation: {x: -0.020192554, y: -0.5587422, z: 0.47643837, w: 0.6785322}
   m_LocalPosition: {x: 0.000047092886, y: 0.000019184326, z: -0.00006974816}
   m_LocalScale: {x: 2.2124372, y: 2.212438, z: 2.2124374}
   m_ConstrainProportionsScale: 0
@@ -1289,9 +1289,11 @@ MonoBehaviour:
   isAtPetrolStation: 0
   currentPetrolStation: {fileID: 0}
   petrolInteractUI: {fileID: 0}
+  petrolParticles: {fileID: 0}
   isAtCharger: 0
   currentCharger: {fileID: 0}
   chargerInteractUI: {fileID: 0}
+  chargerParticles: {fileID: 0}
   hitRange: 3
 --- !u!82 &-7088491610264092318
 AudioSource:
