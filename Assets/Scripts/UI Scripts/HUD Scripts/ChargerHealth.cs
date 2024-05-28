@@ -15,11 +15,12 @@ public class ChargerHealth : MonoBehaviour
     public GameObject[] zapParticles;
     public int zapIndex = 0;
 
-    private void Start()
+    public void Start()
     {
+        //chargerBar = GameObject.Find("Canvas/ChargerUI/Slider").GetComponent<ChargerBar>();
         currentEnergy = maxEnergy;
-        chargerBar = GameObject.Find("Canvas/ChargerUI/Slider").GetComponent<ChargerBar>();
         chargerBar.SetMaxEnergy(maxEnergy);
+
     }
 
     public void TakeEnergy(int energy)
