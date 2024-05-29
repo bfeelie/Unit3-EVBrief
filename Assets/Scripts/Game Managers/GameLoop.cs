@@ -34,6 +34,7 @@ public class GameLoop : MonoBehaviour
     {
         UseTimer();
         WinGame();
+        PauseGame();
     }
 
     void UseTimer()
@@ -109,21 +110,18 @@ public class GameLoop : MonoBehaviour
     // Use these functions for Pause & Main Menu
     public void PauseGame()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu == false)
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
             Cursor.visible = true;
         }
 
-        else if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu == true)
+        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu == true)
         {
             ResumeGame();
             Cursor.visible = false;
         }
-        else
-            Debug.Log("Pause went wrong.");
-            return;
     }
 
     public void ResumeGame()
