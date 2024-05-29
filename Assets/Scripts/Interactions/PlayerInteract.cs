@@ -6,6 +6,8 @@ using Unity.VisualScripting;
 using UnityEditor.Experimental.GraphView;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Microlight.MicroAudio;
+
 
 public class PlayerInteract : MonoBehaviour
 {
@@ -14,9 +16,11 @@ public class PlayerInteract : MonoBehaviour
     private LayerMask chargerStationLayerMask;
 
     // Uses non-player visible camera for raycast (set to display 8)
+    [Header("Player Raycast")]
     [SerializeField]
-    // Changed to public to try BlowUp
     private Transform playerCarCam;
+    [SerializeField][Min(1)] private float hitRange = 3;
+    private RaycastHit hit;
 
     // Could be public later if you need other things to call into it from outside
     [HideInInspector] private Player_Energy playerEnergy;
@@ -35,10 +39,9 @@ public class PlayerInteract : MonoBehaviour
     [SerializeField] GameObject chargerInteractUI;
     public ChargerBar chargerBar;
 
-    [Header("Player")]
+    [Header("Player FX")]
     public ParticleSystem attackParticles;
-    [SerializeField] [Min(1)] private float hitRange = 3;
-    private RaycastHit hit;
+    [SerializeField] MicroSoundGroup carZapSFX;
 
     // Just to make sure the scripts are recognised by the script after start.
     private void Start()
@@ -72,7 +75,11 @@ public class PlayerInteract : MonoBehaviour
                 currentPetrolStation.TakeDamage(10);
                 petrolBar.SetHealth(currentPetrolStation.currentHealth);
                 Debug.Log ("Petrol Station has been hit and now has" + currentPetrolStation.currentHealth + " health.");
-                
+
+                // SFX 
+                MicroAudio.PlayEffectSound(carZapSFX.GetRandomClip);
+
+                // VFX 
                 attackParticles.gameObject.SetActive(true);
                 attackParticles.Play();
 
@@ -130,7 +137,10 @@ public class PlayerInteract : MonoBehaviour
                 chargerBar.SetEnergy(currentCharger.currentEnergy);
                 Debug.Log("Charger used and now has " + currentCharger.currentEnergy + "charges left.");
 
-                // Turn on charging particles -- CHANGE SMOKEPARTICLES TO ELECTRIC WHEN CREATED then add Particle system & uncomment
+                // SFX 
+                MicroAudio.PlayEffectSound(carZapSFX.GetRandomClip);
+
+                // VFX on Powerstation
                 currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
                 currentCharger.zapParticles[currentCharger.zapIndex].GetComponentInChildren<ParticleSystem>().Play();
             }
