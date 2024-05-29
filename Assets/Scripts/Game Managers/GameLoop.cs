@@ -2,12 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using Unity.VisualScripting;
-#if UNITY_EDITOR
+//#if UNITY_EDITOR
 using UnityEditor;
-#endif
+//#endif
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Microlight.MicroAudio;
 
 public class GameLoop : MonoBehaviour
 {
@@ -24,9 +25,12 @@ public class GameLoop : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     public PetrolHealth[] petrolStations;
 
+    [Header("Music")]
+    [SerializeField] AudioClip gameplayMusic;
+
     private void Awake()
     {
-        
+        MicroAudio.PlayOneTrack(gameplayMusic, true);
     }
 
     // Start Timer
@@ -84,10 +88,8 @@ public class GameLoop : MonoBehaviour
 
     public void PlayGame()
     {
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = true;
+        //EditorApplication.isPlaying = true;
         SceneManager.LoadSceneAsync(1);
-#endif
         Cursor.visible = false;
     }
 
