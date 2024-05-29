@@ -38,6 +38,10 @@ public class GameLoop : MonoBehaviour
     {
         UseTimer();
         WinGame();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            PauseGame();
+        }
     }
 
     void UseTimer()
@@ -89,6 +93,7 @@ public class GameLoop : MonoBehaviour
     public void PlayGame()
     {
         //EditorApplication.isPlaying = true;
+        Time.timeScale = 1;
         SceneManager.LoadSceneAsync(1);
         Cursor.visible = false;
     }
@@ -111,32 +116,21 @@ public class GameLoop : MonoBehaviour
     // Use these functions for Pause & Main Menu
     public void PauseGame()
     {
-        if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu == false)
-        {
             pauseMenu.SetActive(true);
             Time.timeScale = 0;
-            Cursor.visible = true;
-        }
-
-        else if (Input.GetKeyDown(KeyCode.Escape) && pauseMenu == true)
-        {
-            ResumeGame();
-            Cursor.visible = false;
-        }
-        else
-            Debug.Log("Pause went wrong.");
-            return;
+            Cursor.visible = true;     
     }
 
     public void ResumeGame()
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
-
+        /*
         if (Cursor.visible != false)
         {
             Cursor.visible = false;
         }
+  */
     }
 
     public void MainMenuReturn()
