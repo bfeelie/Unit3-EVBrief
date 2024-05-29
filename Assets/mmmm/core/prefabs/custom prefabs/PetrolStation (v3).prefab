@@ -1962,7 +1962,7 @@ MonoBehaviour:
   petrolBar: {fileID: 0}
   smokeParticles:
   - {fileID: 3801874737224904987}
-  - {fileID: 0}
+  - {fileID: 5411217832350997266}
   - {fileID: 3933747380317865874}
   - {fileID: 8746208510255585862}
   smokeIndex: 0
@@ -34188,5 +34188,10 @@ PrefabInstance:
 --- !u!4 &5408095899953245152 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 2322432589715914162, guid: 01385850c5531814996d78fdd2997eda, type: 3}
+  m_PrefabInstance: {fileID: 7725813783246607954}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &5411217832350997266 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2319102300124171584, guid: 01385850c5531814996d78fdd2997eda, type: 3}
   m_PrefabInstance: {fileID: 7725813783246607954}
   m_PrefabAsset: {fileID: 0}

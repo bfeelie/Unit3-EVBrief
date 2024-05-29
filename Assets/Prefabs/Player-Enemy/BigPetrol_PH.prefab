@@ -704,8 +704,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   awarenessDistance: 60
-  enemyRadius: 10
-  avoidPower: 4
+  enemyRadius: 20
+  avoidPower: 15
 --- !u!114 &2595023794344157244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -718,8 +718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea347c87fcb46454fa0885c12ded2e1e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10
+  speed: 15
   rotationSpeed: 60
+  thisEnemyPos: {fileID: 2595023793319001195}
 --- !u!114 &5880188924285174521
 MonoBehaviour:
   m_ObjectHideFlags: 0
