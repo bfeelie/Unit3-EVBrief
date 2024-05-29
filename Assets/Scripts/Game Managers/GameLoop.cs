@@ -84,10 +84,7 @@ public class GameLoop : MonoBehaviour
 
     public void PlayGame()
     {
-#if UNITY_EDITOR
-        EditorApplication.isPlaying = true;
         SceneManager.LoadSceneAsync(1);
-#endif
         Cursor.visible = false;
     }
 
