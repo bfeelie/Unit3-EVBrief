@@ -672,7 +672,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   awarenessDistance: 60
   enemyRadius: 10
-  avoidPower: 4
+  avoidPower: 10
 --- !u!114 &1147351797300253023
 MonoBehaviour:
   m_ObjectHideFlags: 0
