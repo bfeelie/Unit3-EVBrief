@@ -8,9 +8,7 @@ using UnityEditor;
 
 public class MenuBehaviour : MonoBehaviour
 {
-    // Only necessary for menu overlay
     public GameObject pauseMenu;
-    public GameObject winMenu;
 
     void Awake()
     {
@@ -19,11 +17,8 @@ public class MenuBehaviour : MonoBehaviour
 
     public void PlayGame()
     {
-        SceneManager.LoadSceneAsync(1);
-
-        // This code is for an overlay instead of scene change - setup for that is in Pacman_Coding scene
-        //mainMenu.SetActive(false);
-        //ResumeGame();
+        Time.timeScale = 1;
+        SceneManager.LoadScene("PrototypeScene");
     }
 
     public void QuitGame()

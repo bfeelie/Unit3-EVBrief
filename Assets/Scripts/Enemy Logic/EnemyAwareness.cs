@@ -13,9 +13,9 @@ public class EnemyAwareness : MonoBehaviour
     [SerializeField] float awarenessDistance;
     private Transform player;
 
-    public float enemyRadius;
-
-    public float avoidPower;
+    [Header("Avoid Each Other")]
+    public float enemyRadius = 10;
+    public float avoidPower = 4;
 
     void Awake()
     {
