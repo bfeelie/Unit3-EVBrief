@@ -47,7 +47,7 @@ public class PlayerInteract : MonoBehaviour
     private void Start()
     {
         playerEnergy = gameObject.GetComponent<Player_Energy>();
-        //currentCharger = gameObject.GetComponent<ChargerHealth>();
+        currentCharger = gameObject.GetComponent<ChargerHealth>();
         attackParticles.Stop();
     }
 
