@@ -25,6 +25,10 @@ public class GameLoop : MonoBehaviour
     [SerializeField] GameObject pauseMenu;
     public PetrolHealth[] petrolStations;
 
+    [SerializeField] GameObject tutorialText;
+    [SerializeField] GameObject controlsPanel;
+    //[SerializeField] GameObject goalReminder;
+
     [Header("Music")]
     [SerializeField] AudioClip gameplayMusic;
 
@@ -94,7 +98,9 @@ public class GameLoop : MonoBehaviour
     {
         //EditorApplication.isPlaying = true;
         Time.timeScale = 1;
-        SceneManager.LoadSceneAsync(1);
+        SceneManager.LoadScene(1);
+
+
         Cursor.visible = false;
     }
 
@@ -125,17 +131,17 @@ public class GameLoop : MonoBehaviour
     {
         Time.timeScale = 1;
         pauseMenu.SetActive(false);
-        /*
+
         if (Cursor.visible != false)
         {
             Cursor.visible = false;
+
         }
-  */
     }
 
     public void MainMenuReturn()
     {
         Cursor.visible = true;
-        SceneManager.LoadSceneAsync(0);
+        SceneManager.LoadScene(0);
     }
 }

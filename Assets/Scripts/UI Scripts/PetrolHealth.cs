@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.PlasticSCM.Editor.WebApi;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -8,14 +7,16 @@ using UnityEngine;
 public class PetrolHealth : MonoBehaviour
 {
     // Max health just in as a precaution for starting game
-    [Header("Petrol Station Stats")]
+    [Header("Health Bar")]
     public int currentHealth = 50;
     public int maxHealth = 50;
     public PetrolBar petrolBar;
 
+    [Header("VFX")]
     public GameObject[] smokeParticles;
     [HideInInspector]
     public int smokeIndex = 0;
+    [SerializeField] GameObject pointerIcon;
 
     public bool isDestroyed = false;
 
@@ -36,7 +37,7 @@ public class PetrolHealth : MonoBehaviour
         {
             currentHealth = 0;
             isDestroyed = true;
-            // Change material or meshes OR not necessary and just keep on PlayerInteract
+            pointerIcon.SetActive(false);
         }
     }
 }

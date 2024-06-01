@@ -1,26 +1,27 @@
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.GraphView;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class ChargerHealth : MonoBehaviour
 {
-    [Header("Charger Stats")]
+    [Header("Energy Level")]
     public ChargerBar chargerBar;
     public int currentEnergy = 50;
     public int maxEnergy = 50;
-    [HideInInspector] public bool isEmpty;
+    // Only needed for recharging energy
+    //[HideInInspector] public bool isEmpty;
 
-    [Header("Particles")]
+    [Header("VFX")]
     public GameObject[] zapParticles;
     public int zapIndex = 0;
+    [SerializeField] GameObject pointerIcon;
+    private PlayerInteract playerInteract;
 
     public void Start()
     {
-        //chargerBar = GameObject.Find("Canvas/ChargerUI/Slider").GetComponent<ChargerBar>();
         currentEnergy = maxEnergy;
         chargerBar.SetMaxEnergy(maxEnergy);
-
     }
 
     public void TakeEnergy(int energy)
@@ -31,9 +32,8 @@ public class ChargerHealth : MonoBehaviour
         if (currentEnergy <= 0)
         {
             currentEnergy = 0;
-            isEmpty = true;
+            //isEmpty = true;
+            pointerIcon.SetActive(false);
         }
     }
-
-    //void WhyIsItBeingAnAss()
 }
