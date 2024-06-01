@@ -46,8 +46,10 @@ public class PlayerInteract : MonoBehaviour
     // Just to make sure the scripts are recognised by the script after start.
     private void Start()
     {
+        //petrolBar = GameObject.Find("Canvas/PetrolStationUI/Slider").GetComponent<PetrolBar>();
         playerEnergy = gameObject.GetComponent<Player_Energy>();
         currentCharger = gameObject.GetComponent<ChargerHealth>();
+        chargerBar = gameObject.GetComponent<ChargerBar>();
         attackParticles.Stop();
     }
 
@@ -138,7 +140,7 @@ public class PlayerInteract : MonoBehaviour
                 // SFX 
                 MicroAudio.PlayEffectSound(carZapSFX.GetRandomClip);
 
-                // To do: VFX on Powerstation
+                // VFX on Powerstation
                 currentCharger.zapParticles[currentCharger.zapIndex].SetActive(true);
                 currentCharger.zapParticles[currentCharger.zapIndex].GetComponentInChildren<ParticleSystem>().Play();
             }
@@ -159,13 +161,12 @@ public class PlayerInteract : MonoBehaviour
         if (AtPetrol)
         {
             petrolInteractUI.SetActive(true);
-            petrolBar.slider.SetValueWithoutNotify(currentPetrolStation.petrolBar.slider.value);
+            //Debug.Log("Activated UI");
         }
 
         // Set UI as false if not at Petrol Station so player can't use it
         else if (!AtPetrol)
         {
-            //petrolBar.slider.SetValueWithoutNotify(0);
             petrolInteractUI.SetActive(false);
         }
 
@@ -177,14 +178,18 @@ public class PlayerInteract : MonoBehaviour
                 currentPetrolStation.currentHealth = 0;
                 petrolInteractUI.SetActive(false);
             }
+
+            if (AtPetrol)
+            {
+                currentCharger.currentEnergy = 0;
+                petrolInteractUI.SetActive(false);
+            }
         }
 
         // Checks if in proximity if true then show UI object (UI object must be added in inspector slot)
         if (AtCharger)
         {
             chargerInteractUI.SetActive(true);
-            currentCharger.currentEnergy = 0;
-            chargerBar.slider.SetValueWithoutNotify(currentCharger.chargerBar.slider.value);
         }
 
         // Set UI as false if not at Charger so player can't use it
@@ -232,7 +237,6 @@ public class PlayerInteract : MonoBehaviour
 
             // Make reference to which petrol station we are at - so script will only target THIS station
             currentPetrolStation = other.gameObject.GetComponent<PetrolHealth>();
-            petrolBar.slider.SetValueWithoutNotify(currentPetrolStation.currentHealth);
         }
         else
         {
@@ -248,7 +252,6 @@ public class PlayerInteract : MonoBehaviour
 
             // Make reference to charger we are at
             currentCharger = other.gameObject.GetComponent<ChargerHealth>();
-            chargerBar.slider.SetValueWithoutNotify(currentCharger.currentEnergy);
         }
         else
         {
@@ -270,8 +273,6 @@ public class PlayerInteract : MonoBehaviour
             AtPetrol = false;
             // blank out petrol station reference
             currentPetrolStation = null;
-
-            attackParticles.gameObject.SetActive(false);
         }
 
         // Check if it's a charger
@@ -282,8 +283,6 @@ public class PlayerInteract : MonoBehaviour
             // Same logic as petrol station
             AtCharger = false;
             currentCharger = null;
-
-            // To do: Remind me to put the charger particles in here
         }
 
         else

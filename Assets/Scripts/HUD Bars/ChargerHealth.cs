@@ -12,14 +12,15 @@ public class ChargerHealth : MonoBehaviour
     [HideInInspector] public bool isEmpty;
 
     [Header("Particles")]
-    public ParticleSystem _zapParticles;
     public GameObject[] zapParticles;
     public int zapIndex = 0;
 
     public void Start()
     {
+        //chargerBar = GameObject.Find("Canvas/ChargerUI/Slider").GetComponent<ChargerBar>();
         currentEnergy = maxEnergy;
         chargerBar.SetMaxEnergy(maxEnergy);
+
     }
 
     public void TakeEnergy(int energy)
@@ -34,35 +35,5 @@ public class ChargerHealth : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // Check if it's a petrol station
-        if (other.gameObject.GetComponent<Player_Energy>())
-        {
-            if (Input.GetKeyDown(KeyCode.E))
-            {
-                _zapParticles.Play();
-                Debug.Log("Turned on particles");
-            }
-        }
-
-        else
-        {
-            Debug.Log("Didn't start particles. D'oh");
-        }
-    }
-
-    private void OnTriggerExit(Collider other)
-    {
-        // Check if it's a petrol station
-        if (other.gameObject.GetComponent<Player_Energy>())
-        {
-            _zapParticles.Stop();
-        }
-
-        else
-        {
-            Debug.Log("Didn't stop particles. D'oh");
-        }
-    }
+    //void WhyIsItBeingAnAss()
 }

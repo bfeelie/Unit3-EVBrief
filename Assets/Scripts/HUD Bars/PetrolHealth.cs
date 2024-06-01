@@ -1,4 +1,3 @@
-
 using System.Collections;
 using System.Collections.Generic;
 using Unity.PlasticSCM.Editor.WebApi;
@@ -14,7 +13,6 @@ public class PetrolHealth : MonoBehaviour
     public int maxHealth = 50;
     public PetrolBar petrolBar;
 
-    [Header("FX")]
     public GameObject[] smokeParticles;
     [HideInInspector]
     public int smokeIndex = 0;
@@ -38,7 +36,6 @@ public class PetrolHealth : MonoBehaviour
         {
             currentHealth = 0;
             isDestroyed = true;
-
             // Change material or meshes OR not necessary and just keep on PlayerInteract
         }
     }
